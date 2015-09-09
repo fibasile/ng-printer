@@ -1,0 +1,25 @@
+
+
+<div ng-hide="isRestarting" class="alert alert-warning">
+
+<p class="lead">Restart control panel</h1>
+
+<p>Are you sure you want to restart the panel?</p>
+
+</div>
+
+
+<button ng-hide="isRestarting" class="btn btn-danger btn-xlarge" ng-click="restart()" nd-disabled="isRestarting">Yes, restart panel</button>
+
+
+
+<div ng-show="isRestarting">
+
+<div class="alert alert-info">
+<p class="lead">Restart in progress...</p>
+<p>Reload the page in 60 seconds.</p>
+</div>
+
+<button class="btn btn-success btn-xlarge" ng-click="reloadPage()">Reload</button>
+
+</div>

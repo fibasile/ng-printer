@@ -1,0 +1,94 @@
+
+<div class="row">
+
+    <div class="col-sm-4">
+    <a title="Go to the home folder" class="btn btn-default" ng-click="browse()">
+            <i class="fa fa-home"></i>
+            </a>
+    </div>
+
+    <div class="col-sm-4 text-right">
+        <div class="dropdown">
+        <button class="btn btn-default" ng-click="refresh()"><i class="fa fa-refresh "></i> Refresh</button>
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <i class="fa fa-gear"></i> <span class="caret"></span>
+        </button>
+
+         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a ng-click="sort('name')">Sort by name</a></li>
+            <li><a ng-click="sort('-date')">Sort by date</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a ng-click="filterFiles('gcode')">Show only gcode</a></li>
+            <li><a ng-click="filterFiles()">Show all files</a></li>
+         </ul>
+        </div> 
+         
+</div>
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="col-sm-8">
+    <p>
+    <ul class="list-group" style="height: 280px; overflow-y:scroll">
+    
+        <li class="list-group-item" ng-repeat="f in files | orderBy:order"><a ng-click="selectFile(f)" style="font-size:18px">
+            <i class="fa fa-file-code-o"></i> {{f.name}}</a>
+            <br/><small style="margin-left:20px;">Size {{f.size}} bytes</small>
+        </li>
+<!--        <li class="list-group-item">
+          <a href="#" style="font-size:18px"><i class="fa fa-file-photo-o"></i> file.stl</a>
+        </li>
+        <li class="list-group-item">
+          <a href="#" style="font-size:18px"><i class="fa fa-file-photo-o"></i> file.stl</a>
+        </li>
+        <li class="list-group-item">
+          <a href="#" style="font-size:18px"><i class="fa fa-file-code-o"></i> file.gcode</a>
+        </li>
+                <li class="list-group-item">
+          <a href="#" style="font-size:18px"><i class="fa fa-file-photo-o"></i> file.stl</a>
+        </li>
+        <li class="list-group-item">
+          <a href="#" style="font-size:18px"><i class="fa fa-file-photo-o"></i> file.stl</a>
+        </li>
+        <li class="list-group-item">
+          <a href="#" style="font-size:18px"><i class="fa fa-file-code-o"></i> file.gcode</a>
+        </li>-->
+        </ul>
+    </p>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+        <div class="panel-heading">
+        <label>File information</label>
+        </div>
+        <div class="panel-body">
+        
+            <div ng-hide="selectedFile">
+                No file selected.
+            </div>       
+            <div ng-show="selectedFile">
+                
+            <i class="fa fa-file-code-o"></i> {{selectedFile.name}}</a>
+            <br/><small style="margin-left:20px;">Size {{selectedFile.size}} bytes</small>
+            
+            <hr>
+            <div class="text-right">
+            
+                Print time: {{ roundTime(selectedFile.gcodeAnalysis.estimatedPrintTime) }}   <br/>
+                Filament: {{ roundFilament(selectedFile.gcodeAnalysis.filament.tool0.length)}}        
+            </div>
+            
+            <hr>
+            
+            <button class="btn btn-success" ng-click="startPrinting()">Start printing</button>
+            
+            </div>
+        
+        </div>
+        </div>
+        
+    </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-sm-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <label>Jog</label>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <table class="text-center jogtable">
+                                <tr>
+                                    <td colspan="3"><strong>X - Y</strong></td>
+                                    <td><strong>Z</strong></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><a class="btn btn-default" ng-click="jog({y:1})"><i class="fa fa-arrow-up fa-2x"></i></a></td>
+                                    <td></td>
+                                    <td><a class="btn btn-default" ng-click="jog({z:1})"><i class="fa fa-arrow-up fa-2x"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td><a class="btn btn-default" ng-click="jog({x:-1})"><i class="fa fa-arrow-left fa-2x"></i></a></td>
+                                    <td><a class="btn btn-default" ng-click="home()"><i class="fa fa-home fa-2x"></i></a></td>
+                                    <td><a class="btn btn-default" ng-click="jog({x:1})"><i class="fa fa-arrow-right fa-2x"></i></a></td>
+                                    <td><a class="btn btn-default" ng-click="home_z()"><i class="fa fa-home fa-2x"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><a class="btn btn-default btn-sm" ng-click="jog({y:-1})"><i class="fa fa-arrow-down fa-2x"></i></a></td>
+                                    <td></td>
+                                    <td><a class="btn btn-default btn-sm" ng-click="jog({z:-1})"><i class="fa fa-arrow-down fa-2x"></i></a></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-sm-5">
+                            <label>Distance</label>
+                                <div class="btn-group" data-toggle="buttons-radio" id="jog_distance">
+                                <button type="button" class="btn btn-primary" ng-class="{'active' : (jogScale == 0.1)}" ng-click="setJogScale(0.1)">0.1</button>
+                                <button type="button" class="btn btn-primary" ng-class="{'active' : (jogScale == 1)}" ng-click="setJogScale(1)">1</button>
+                                <button type="button" class="btn btn-primary" ng-class="{'active' :(jogScale == 10)}" ng-click="setJogScale(10)">10</button>
+                                <button type="button" class="btn btn-primary" ng-class="{'active' :(jogScale == 100)}" ng-click="setJogScale(100)">100</button>
+                            </div>
+                            <hr/>
+                            <div class="form-group">
+                                <br/>
+                                <rzslider rz-slider-model="feed_rate" rz-slider-floor="0" rz-slider-ceil="200">
+                            </div>
+                            <label>Feed: <span class="label label-default">{{ feed_rate }}%</span> </label>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <label>Tool</label>
+            </div>
+            <div class="panel-body">
+                <a class="btn btn-default btn-block btn-lg" ui-sref="extruder"> Change tool</a>
+                <!--        <a class="btn btn-default btn-block  btn-lg" ng-click="extrude()"> Extrude</a>
+                <a class="btn btn-default btn-block  btn-lg" ngclick="retract"> Retract</a> 
+                <rzslider rz-slider-model="extrude_flow" rz-slider-floor="0" 
+     rz-slider-ceil="200" 
+     ng-model="extrude_flow"><br/>
+    <small>Flow: {{ extrude_flow }}</small> -->
+            </div>
+        </div>
+    </div>
+    <!--  <div class="col-sm-3">
+        <div class="panel panel-default">
+        <div class="panel-heading">    
+              <label>General</label>
+        </div>
+        
+        <div class="panel-body">        
+    
+           <a class="btn btn-default btn-block btn-lg"> Motors off</a>
+           <a class="btn btn-default btn-block btn-lg"> Fan on</a>
+           <a class="btn btn-default btn-block btn-lg"> Fan off</a>
+ 
+        </div>
+        </div>
+    </div>
+-->
+</div>

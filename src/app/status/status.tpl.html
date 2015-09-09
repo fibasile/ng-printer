@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Machine status</div>
+            <div class="panel-body">
+                <p class="lead">
+                    <label>
+                        Machine State:
+                    </label>
+                    <span>{{status}}</span>
+                </p>
+                <p class="lead">
+                    <label>
+                        File: 
+                    </label>
+                    <span>{{ job.file.name }}</span>
+                </p>
+            </div>
+        </div>
+        <div class="panel panel-default" ng-class="{ 'panel-danger': isPrinting }" ng-show="isPrinting || isPaused">
+            <div class="panel-heading">Print progress</div>
+            <div class="panel-body">
+            <progressbar class="progress progress-striped" type="danger" value="progress_slider">{{progress.percent}}%</progressbar>
+           
+            <div class="btn-toolbar">
+            <button class="btn btn-primary btn-lg" ng-click="pausePrint()" ng-hide="isPaused">Pause</button>
+            <button class="btn btn-success btn-lg" ng-click="pausePrint()" ng-show="isPaused">Resume</button>
+            <button class="btn btn-warning  btn-lg" ng-click="restartPrint()"  ng-show="isPaused">Restart</button>
+            <button class="btn btn-danger  btn-lg" ng-click="cancelPrint()">Stop</button>
+            </div>
+
+            </div>
+        </div>
+
+        <small>Octoprint api v.{{api_version}} server v.{{ server_version}}</small>
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Print time</div>
+            <div class="panel-body">
+                <p>
+                    <label>
+                        Approx. Print time:
+                    </label>
+                    <span>{{ formatSeconds(job.estimatedPrintTime) }}</span>
+                </p>
+                <p>
+                    <label>
+                        Print time:
+                    </label>
+                    <span>{{ formatSeconds(progress.printTime)}}</span>
+                </p>
+                <p>
+                    <label>
+                        Print time left:
+                    </label>
+                    <span ng-show="progress.printTimeLeft">{{ formatSeconds(progress.printTimeLeft)}}</span>
+                    <span ng-hide="progress.printTimeLeft">print completed</span>
+                </p>
+            </div>
+        </div>
+           <div class="panel panel-default">
+            <div class="panel-heading">Temperature</div>
+            <div class="panel-body">
+                <p>
+                    <label>
+                        Actual vs Target
+                    </label>
+                    <span>{{tempData.actual}} / {{tempData.target}}</span>
+                    <progressbar max="300" min=0 type="warning" value="tempData.actual"></progressbar>
+                    <progressbar max="300" min=0 type="danger" value="tempData.target"></progressbar>
+
+               </p>
+            </div>
+        </div> 
+    </div>
+</div>

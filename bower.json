@@ -1,5 +1,5 @@
 {
-  "name": "ng-boilerplate",
+  "name": "ReossGui",
   "version": "0.3.2",
   "devDependencies": {
     "angular": "~1.2",
@@ -8,5 +8,9 @@
     "angular-bootstrap": "~0.10.0",
     "angular-ui-router": "~0.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "angular-moment": "~0.10.3",
+    "angularjs-slider": "~0.1.27",
+    "font-awesome": "~4.4.0"
+  }
 }

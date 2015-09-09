@@ -1,0 +1,67 @@
+
+<div class="row">
+
+
+    <div class="col-sm-6">
+          
+        <div class="panel panel-default">
+           <div class="panel-heading">Connection status</div>
+           <div class="panel-body">      
+                <p style="margin-top:20px" class="text-center">
+                    <span  class="label-xlarge">{{status}}</span>
+                  <button class="btn btn-default" ng-click="refreshAction()"><i class="fa fa-refresh"></i></button>   
+                    </p>
+
+           </div>
+      </div>
+      <div class="text-right">
+                <button ng-hide="isConnected" class="btn btn-success btn-xlarge" ng-click="connectAction()">Connect</button>        
+                <button ng-show="isConnected" class="btn btn-danger btn-xlarge" ng-click="disconnectAction()">Disconnect</button>         
+                     
+      </div>
+    
+    <br/>
+
+
+        <div ng-hide="hasSettings" class="alert alert-info">
+        Loading settings...
+        </div>
+    
+    
+    </div>
+
+
+    <div class="col-sm-6">    
+    
+    
+<div class="panel panel-default">
+    <div class="panel-heading">Settings</div>
+    <div class="panel-body">
+
+    <form class="form form-compact">
+        <div class="form-group">
+        <label>Serial port</label>
+        <select class="form-control" ng-model="selected_port"  ng-disabled="isConnected">
+            <option ng-repeat="port in serial_ports" value="{{port}}">{{port}}</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Baud rate</label>
+        <select class="form-control" ng-model="selected_baud"  ng-disabled="isConnected">
+            <option ng-repeat="baud in baud_rates" value="{{baud}}">{{baud}}</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Printer profile</label>
+        <select class="form-control" ng-model="selected_profile" ng-disabled="isConnected">
+            <option ng-repeat="profile in profiles" value="{{profile.id}}">{{profile.name}}</option>
+        </select>        
+        </div>
+    </form>
+    </div>
+</div>
+
+    </div>
+</div>
+
+

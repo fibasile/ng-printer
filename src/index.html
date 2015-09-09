@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="ngBoilerplate" ng-controller="AppCtrl">
+<html ng-app="ReossGui" ng-controller="AppCtrl">
   <head>
     <title ng-bind="pageTitle"></title>
 
@@ -19,7 +19,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- font awesome from BootstrapCDN -->
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="assets/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> -->
 
     <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
     <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
@@ -28,13 +29,20 @@
     <script type="text/javascript" src="<%= file %>"></script><% }); %>
 
     <!-- it's stupid to have to load it here, but this is for the +1 button -->
-    <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
-      { "parsetags": "explicit" }
-    </script>
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+
+    <script type="text/javascript" src="assets/lib/jsc3d/bin/jsc3d.min.js"></script>
+
+    <style>
+
+      div.navbar.navbar-default.navbar-static-top {
+        margin-top: 0px;
+      }
+    </style>
   </head>
   <body>
-    <div class="container">
-      <div class="navbar navbar-default">
+
+      <div class="navbar navbar-default navbar-static-top">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" ng-init="menuCollapsed = true"
             ng-click="menuCollapsed = ! menuCollapsed">
@@ -44,78 +52,76 @@
             <span class="icon-bar"></span>
           </button>
           <div class="navbar-brand">
-            ngbp
-            <small>
-              <a href="http://github.com/ngbp/ngbp/blob/v<%= version %>-release/CHANGELOG.md">
-                v<%= version %>
-              </a>
-            </small>
+          ReoSS<br/>Control Panel
           </div>
         </div>
         <div class="collapse navbar-collapse" collapse="menuCollapsed">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav text-center">
             <li ui-sref-active="active">
-              <a href ui-sref="home">
-                <i class="fa fa-home"></i>
-                Home
+              <a href ui-sref="connection">
+                <i class="fa fa-home fa-3x"></i>
+                <!-- <br/>
+                Connection -->
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a href ui-sref="status">
+                <i class="fa fa-info-circle fa-3x"></i>
+                <!-- <br/>
+                Status -->
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a href ui-sref="jog">
+                <i class="fa fa-arrows fa-3x"></i>
+                <!-- <br/>
+                Status -->
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a href ui-sref="wizard">
+                <i class="fa fa-print fa-3x"></i>
+                <!-- <br/>
+                Status -->
+              </a>
+            </li>            
+            <li ui-sref-active="active">
+              <a href ui-sref="extruder">
+                <i class="fa fa-filter fa-3x"></i>
+                <!-- <br/>
+                Change tool -->
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a href ui-sref="settings">
+                <i class="fa fa-wrench fa-3x"></i><!-- <br/>
+                Settings -->
               </a>
             </li>
             <li ui-sref-active="active">
               <a href ui-sref="about">
-                <i class="fa fa-info-circle"></i>
-                What is it?
+                <i class="fa fa-question-circle fa-3x"></i><!-- <br/>
+                Help -->
               </a>
             </li>
-            <li>
-              <a href="https://github.com/ngbp/ngbp#readme">
-                <i class="fa fa-book"></i>
-                Read the Docs
+            <li ui-sref-active="active">
+              <a href ui-sref="restart">
+                <i class="fa fa-refresh fa-3x"></i><!-- <br/>
+                Help -->
               </a>
             </li>
-            <li>
-              <a href="https://github.com/ngbp/ngbp">
-                <i class="fa fa-github-alt"></i>
-                Github
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/ngbp/ngbp/issues">
-                <i class="fa fa-comments"></i>
-                Support
-              </a>
-            </li>
+
           </ul>
         </div>
       </div>
-    </div>
+   
 
     <div class="container" ui-view="main"></div>
 
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-inner">
-          <ul class="social">
-            <li><a target="_blank" href="http://gplus.to/joshdmiller"><i class="fa fa-google-plus-sign"></i></a></li>
-            <li><a target="_blank" href="http://twitter.com/joshdmiller"><i class="fa fa-twitter-sign"></i></a></li>
-            <li><a target="_blank" href="http://linkedin.com/in/joshdmiller"><i class="fa fa-linkedin-sign"></i></a></li>
-            <li><a target="_blank" href="http://github.com/ngbp/ngbp"><i class="fa fa-github-sign"></i></a></li>
-          </ul>
-          
 
-          <p>
-            (c) 2013 <a href="http://www.joshdavidmiller.com">Josh David Miller</a>. 
-            <a href="http://github.com/ngbp/ngbp/fork_select">Fork this</a>
-            to kickstart your next project.
-            <br />
-            ngbp is based on
-            <a href="http://www.angularjs.org">AngularJS</a>,
-            <a href="http://getbootstrap.com">Bootstrap</a>, 
-            <a href="http://angular-ui.github.com/bootstrap">UI Bootstrap</a>,
-            and 
-            <a href="http://fortawesome.github.com/Font-Awesome">Font Awesome</a>.        
-          </p>
-        </div>
-      </div>
+    <footer class="footer">
+     <i class="fa fa-gear"></i> <span ng-bind="pageTitle">Change Extruder</span>
     </footer>
+
   </body>
 </html>

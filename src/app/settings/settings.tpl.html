@@ -1,0 +1,97 @@
+<div class="row">
+    <div class="col-sm-12">
+        <tabset>
+            <tab heading="Fuse">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Settings</h4>
+                        <div class="well">
+                            <form class="form form-inline" accept-charset="utf-8">
+                                <div class="form-group">
+                                    <label>Extruder size</label>
+                                    <input type="number" class="form-control" name="extruder" ng-model="settings.extruder_size" required />
+                                </div>
+                                <br/>
+                                <div class="form-group">
+                                    <label>Filament size</label>
+                                    <input type="number" class="form-control" name="extruder" ng-model="settings.filament_size" required />
+                                </div>
+                                <br/>
+                                <div class="form-group">
+                                    <label>Extruder temp</label>
+                                    <input type="number" class="form-control" name="extruder" ng-model="settings.extruder_temp" required />
+                                </div>
+                                <br/>
+                                <div class="form-group">
+                                    <label>Bed temp</label>
+                                    <input type="number" class="form-control" name="extruder" ng-model="settings.bed_temp" required />
+                                </div>
+                                <br/>
+                                <div class="form-group">
+                                    <label>Fill %</label>
+                                    <input type="number" class="form-control" name="extruder" ng-model="settings.bed_temp" required />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>Profiles</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item">Default Profile <i class="fa fa-check"></i></li>
+                            <li class="list-group-item">Random Profile</li>
+                            <li class="list-group-item">Sample Profile</li>
+                            <li class="list-group-item">High speed Profile</li>
+                            <li class="list-group-item">High quality Profile</li>
+                        </ul>
+                    </div>
+                </div>
+            </tab>
+            <tab heading="Wet">
+                <div class="form-group">
+                    <h3>Presets:</h3>
+                    <br/>
+                    <table class="table table-striped" style="width:100%">
+                        <tr ng-repeat="preset in settings.presets">
+                            <td>
+                                <a href="#">{{ preset.name }}</a>
+                            </td>
+                            <td>
+                                Example description</td>
+                            <td align="right">
+                                <a href="#">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                    <a class="btn btn-default btn-sm pull-right">New preset</a>
+                </div>
+            </tab>
+        </tabset>
+        <!--
+            <div class="panel panel-default" style="margin-top: 30px">
+                <div class="panel-heading">
+                    <label>Edit preset</label>
+                </div>
+                <div class="panel-body">
+                    <form class="form form-horizontal" accept-charset="utf-8">
+                        <div class="form-group">
+                            <label>Name:
+                                <input type="text" class="form-control" name="preset_name" ng-model="settings.new_preset_name" value="">
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>Length:
+                                <input type="number" class="form-control" name="preset_length" ng-model="settings.new_preset_length" value="">
+                            </label>
+                        </div>
+                        <button class="btn btn-lg pull-right btn-success">Save</button>
+                    </form>
+                </div>
+            </div>-->
+    </div>
+</div>
