@@ -35,7 +35,7 @@ angular.module('OctoPrint', [])
 .factory('OctoPrint', ['$http', function($http) {
     var Connection = {};
 
-    Connection.API_KEY = "E56087BAE34B43968BFD5E808DBAF0A0";
+    Connection.API_KEY = "A6FB4A725BCE42FD8D4A141937D3A04E";
     Connection.API_ENDPOINT = "http://localhost:5000";
 
 
