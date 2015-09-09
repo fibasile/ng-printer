@@ -56,7 +56,7 @@ angular.module('ReossGui.connection', [
     $scope.selected_baud = null;
     $scope.selected_profile = null;
 
-    var reloadConnection = function() {
+    var reloadConnection = function(opts) {
 
         OctoPrint.getConnectionSettings(function(settings) {
 
@@ -70,18 +70,30 @@ angular.module('ReossGui.connection', [
                 $scope.hasSettings = true;
                 $scope.isConnected = (settings.current.state == 'Operational');
                 $scope.status = settings.current.state;
+                
+                if (opts && opts.status) {
+                    return;
+                }
                 $scope.serial_ports = settings.options.ports;
                 $scope.profiles = settings.options.printerProfiles;
                 $scope.baud_rates = settings.options.baudrates;
                 $scope.selected_profile = settings.current.printerProfile;
                 
+
                 if (settings.current.port != null ) {
-                    $scope.selected_port = settings.current.port;
-                    $scope.selected_baud = settings.current.baudrate;
+                    if ($scope.selected_port == null) {
+                        $scope.selected_port = settings.current.port;
+                    }
+                    if ($scope.selected_baud == null){
+                        $scope.selected_baud = settings.current.baudrate;
+                    }
                 } else {
-                    $scope.selected_port = settings.options.portPreference;
-                    $scope.selected_baud = settings.options.baudratePreference;
-                
+                    if ($scope.selected_port == null) {
+                       $scope.selected_port = settings.options.portPreference;
+                    }
+                    if ($scope.selected_baud == null){
+                        $scope.selected_baud = settings.options.baudratePreference;
+                    }            
                 }
                  
             }
@@ -113,7 +125,7 @@ angular.module('ReossGui.connection', [
 
 
     $interval(reloadConnection, 5000);
-    reloadConnection();
+    reloadConnection({'status' : true});
 }])
 
 ;
