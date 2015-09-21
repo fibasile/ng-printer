@@ -42,7 +42,7 @@
                             <hr/>
                             <div class="form-group">
                                 <br/>
-                                <rzslider rz-slider-model="feed_rate" rz-slider-floor="0" rz-slider-ceil="200">
+                                <rzslider rz-slider-model="feed_rate" rz-slider-floor="0" rz-slider-ceil="200"></rzslider>
                             </div>
                             <label>Feed: <span class="label label-default">{{ feed_rate }}%</span> </label>
                             
@@ -58,13 +58,17 @@
                 <label>Tool</label>
             </div>
             <div class="panel-body">
-                <a class="btn btn-default btn-block btn-lg" ui-sref="extruder"> Change tool</a>
-                <!--        <a class="btn btn-default btn-block  btn-lg" ng-click="extrude()"> Extrude</a>
+<!--                 <a class="btn btn-default btn-block btn-lg" ui-sref="extruder"> Change tool</a>
+ -->                       <a class="btn btn-default btn-block  btn-lg" ng-click="extrude()"> Extrude</a>
                 <a class="btn btn-default btn-block  btn-lg" ngclick="retract"> Retract</a> 
+                <br/>
+
                 <rzslider rz-slider-model="extrude_flow" rz-slider-floor="0" 
      rz-slider-ceil="200" 
-     ng-model="extrude_flow"><br/>
-    <small>Flow: {{ extrude_flow }}</small> -->
+     ng-model="extrude_flow">
+     </rzslider>
+                <br/>
+                <label>Flow: <span class="label label-default">{{ extrude_flow }}</span> %</label>
             </div>
         </div>
     </div>
