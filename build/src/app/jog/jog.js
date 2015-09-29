@@ -75,7 +75,7 @@ angular.module( 'ReossGui.jog', [
     
     $scope.home_z=function(){
 
-        var axis = ["z"];
+        var axis = ["x","y"];
         OctoPrint.homeHead(axis, function(){
            console.log("Home head done");
            console.log(axis);        
@@ -85,30 +85,28 @@ angular.module( 'ReossGui.jog', [
 
     $scope.feed_rate = 100;
     
-
-
-
     $scope.extrude_flow = 100;
 
     $scope.extruderFlowChange = function(){
-
 
 
     };
 
 
     $scope.extrude = function(){
-    
+      OctoPrint.extrude(extrude_flow, function(){
 
 
+      });
     };
 
 
 
     $scope.retract = function(){
+      OctoPrint.retract(retract_flow, function(){
 
 
-
+      });
     };
 
 

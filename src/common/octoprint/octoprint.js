@@ -238,6 +238,24 @@ angular.module('OctoPrint', [])
 
     Connection.extrude = function(flow, cb){
 
+        var rate = flow * 10;
+
+        // G91
+        // G1 E10 F1200
+        // G90
+
+        getRequest({
+            url: Connection.API_ENDPOINT + '/api/printer/command',
+            method: "POST",
+            content_type: 'application/json',
+            data:{
+                "commands": [
+                    "G91",
+                    "G1 E10 F" + rate,
+                    "G90"
+                ]
+            }},cb
+        );
 
 
     };
@@ -245,6 +263,26 @@ angular.module('OctoPrint', [])
 
     Connection.retract = function(flow, cb){
 
+        var rate = flow * 10;
+
+
+        // G91
+        // G1 E-10 F1200
+        // G90
+
+
+        getRequest({
+            url: Connection.API_ENDPOINT + '/api/printer/command',
+            method: "POST",
+            content_type: 'application/json',
+            data:{
+                "commands": [
+                    "G91",
+                    "G1 E-10 F" + rate,
+                    "G90"
+                ]
+            }},cb
+        );
 
 
     };

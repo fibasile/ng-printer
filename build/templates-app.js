@@ -338,7 +338,7 @@ angular.module("jog/jog.tpl.html", []).run(["$templateCache", function($template
     "                            <hr/>\n" +
     "                            <div class=\"form-group\">\n" +
     "                                <br/>\n" +
-    "                                <rzslider rz-slider-model=\"feed_rate\" rz-slider-floor=\"0\" rz-slider-ceil=\"200\">\n" +
+    "                                <rzslider rz-slider-model=\"feed_rate\" rz-slider-floor=\"0\" rz-slider-ceil=\"200\"></rzslider>\n" +
     "                            </div>\n" +
     "                            <label>Feed: <span class=\"label label-default\">{{ feed_rate }}%</span> </label>\n" +
     "                            \n" +
@@ -354,13 +354,17 @@ angular.module("jog/jog.tpl.html", []).run(["$templateCache", function($template
     "                <label>Tool</label>\n" +
     "            </div>\n" +
     "            <div class=\"panel-body\">\n" +
-    "                <a class=\"btn btn-default btn-block btn-lg\" ui-sref=\"extruder\"> Change tool</a>\n" +
-    "                <!--        <a class=\"btn btn-default btn-block  btn-lg\" ng-click=\"extrude()\"> Extrude</a>\n" +
+    "<!--                 <a class=\"btn btn-default btn-block btn-lg\" ui-sref=\"extruder\"> Change tool</a>\n" +
+    " -->                       <a class=\"btn btn-default btn-block  btn-lg\" ng-click=\"extrude()\"> Extrude</a>\n" +
     "                <a class=\"btn btn-default btn-block  btn-lg\" ngclick=\"retract\"> Retract</a> \n" +
+    "                <br/>\n" +
+    "\n" +
     "                <rzslider rz-slider-model=\"extrude_flow\" rz-slider-floor=\"0\" \n" +
     "     rz-slider-ceil=\"200\" \n" +
-    "     ng-model=\"extrude_flow\"><br/>\n" +
-    "    <small>Flow: {{ extrude_flow }}</small> -->\n" +
+    "     ng-model=\"extrude_flow\">\n" +
+    "     </rzslider>\n" +
+    "                <br/>\n" +
+    "                <label>Flow: <span class=\"label label-default\">{{ extrude_flow }}</span> %</label>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
