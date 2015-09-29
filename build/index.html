@@ -44,14 +44,13 @@
     <script type="text/javascript" src="src/app/restart/restart.js"></script>
     <script type="text/javascript" src="src/app/settings/settings.js"></script>
     <script type="text/javascript" src="src/app/status/status.js"></script>
+    <script type="text/javascript" src="src/app/wet/wet.js"></script>
     <script type="text/javascript" src="src/app/wizard/wizard.js"></script>
     <script type="text/javascript" src="src/common/octoprint/octoprint.js"></script>
     <script type="text/javascript" src="src/common/plusOne/plusOne.js"></script>
+    <script type="text/javascript" src="src/common/pump/pump.js"></script>
     <script type="text/javascript" src="templates-common.js"></script>
     <script type="text/javascript" src="templates-app.js"></script>
-
-    <!-- it's stupid to have to load it here, but this is for the +1 button -->
-    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
     <script type="text/javascript" src="assets/lib/jsc3d/bin/jsc3d.min.js"></script>
 
@@ -103,6 +102,13 @@
             <li ui-sref-active="active">
               <a href ui-sref="wizard">
                 <i class="fa fa-print fa-3x"></i>
+                <!-- <br/>
+                Status -->
+              </a>
+            </li>            
+            <li ui-sref-active="active">
+              <a href ui-sref="wet">
+                <i class="fa fa-eyedropper fa-3x"></i>
                 <!-- <br/>
                 Status -->
               </a>
