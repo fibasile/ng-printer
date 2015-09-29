@@ -11,6 +11,7 @@ angular.module( 'ReossGui', [
   'ReossGui.extruder',
   'ReossGui.connection',
   'ReossGui.status',
+  'ReossGui.wet',
   'ui.router',
   'angularMoment'
 ])
