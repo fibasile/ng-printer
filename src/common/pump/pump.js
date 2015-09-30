@@ -43,7 +43,7 @@ angular.module('pump', [])
         getRequest({
             url: Connection.API_ENDPOINT + "/pump/driver",
             method: "POST",
-            content_type: 'application/json',
+            // content_type: 'application/json',
             data: data
         }, cb);
     };
@@ -57,7 +57,7 @@ angular.module('pump', [])
         getRequest({
             url: Connection.API_ENDPOINT + "/pump/driver",
             method: "POST",
-            content_type: 'application/json',
+            // content_type: 'application/json',
             data: data
         }, cb);
     };
@@ -70,7 +70,7 @@ angular.module('pump', [])
         getRequest({
             url: Connection.API_ENDPOINT + "/pump/driver",
             method: "POST",
-            content_type: 'application/json',
+            // content_type: 'application/json',
             data: data
                     
         }, cb);
