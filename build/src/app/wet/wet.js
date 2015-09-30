@@ -30,9 +30,9 @@ angular.module('ReossGui.wet', [
 .controller('WetCtrl', ['$scope', 'OctoPrint', 'pump', function WetCtrl($scope, OctoPrint, pump) {
 
 
-    $scope.flow = 100;
-    $scope.size = 100;
-    $scope.capacity = 100;
+    $scope.flow = 1;
+    $scope.size = 1;
+    $scope.capacity = 1;
     $scope.direction = 0;
     $scope.microsteps =  0;
 
@@ -63,8 +63,7 @@ angular.module('ReossGui.wet', [
         var steps = $scope.microsteps / 128;
         var direction = 0;
         pump.run( direction, steps, function(){
-
-            alert("Yeah");
+            // alert("Yeah");
         });
     };
 
@@ -72,7 +71,7 @@ angular.module('ReossGui.wet', [
     $scope.stopExtruding = function(){
         pump.stop(function(){
 
-            alert("Stoppa");
+            // alert("Stoppa");
         });
     };
 

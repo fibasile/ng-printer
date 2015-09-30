@@ -618,7 +618,7 @@ angular.module("wet/wet.tpl.html", []).run(["$templateCache", function($template
     "                <br/>\n" +
     "                <label>Diameter (mm)</label>\n" +
     "                <form class=\"form form-inline\">\n" +
-    "                    <select ngModel=\"size\" name=\"string\" required ngRequired=\"string\">\n" +
+    "                    <select ngModel=\"size\" name=\"string\" class=\"form-control input-lg\" required ngRequired=\"string\">\n" +
     "                        <option value=\"5\">5</option>\n" +
     "                        <option value=\"10\">10</option>\n" +
     "                    </select>\n" +

@@ -72,6 +72,7 @@ angular.module('pump', [])
             method: "POST",
             content_type: 'application/json',
             data: data
+                    
         }, cb);
     };
 
