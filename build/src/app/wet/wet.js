@@ -30,8 +30,8 @@ angular.module('ReossGui.wet', [
 .controller('WetCtrl', ['$scope', 'OctoPrint', 'pump', function WetCtrl($scope, OctoPrint, pump) {
 
 
-    $scope.flow = 1;
-    $scope.size = 1;
+    $scope.flow = 100;
+    $scope.size = 5;
     $scope.capacity = 1;
     $scope.direction = 0;
     $scope.microsteps =  0;
@@ -44,21 +44,31 @@ angular.module('ReossGui.wet', [
         {vol: 0.3, diam: 10, steps: 0.212},
         {vol: 0.5, diam: 5, steps: 1.415},
         {vol: 0.5, diam: 10, steps: 0.353},
-        {vol: 1, diam: 10, steps: 0.707}
+        {vol: 1, diam: 10, steps: 0.707},
+        {vol: 1, diam: 5, steps: 2.830}
     ];
 
-    $scope.setFlow = function(f){
-        $scope.flow += f;
+    $scope.setFlow = function(f){    
+        $scope.flow += parseFloat(f);
+        $scope.flow = $scope.flow.toFixed(3);
+        $scope.flow = Math.max(0,$scope.flow);
+        $scope.updateFlow();
     };
 
     $scope.setSize = function(f){
-        $scope.size += f;
+        $scope.size += parseFloat(f);
+        $scope.size = Math.max(0,$scope.size);
+        $scope.updateFlow();
     };
 
     $scope.setCapacity = function(f){
-        $scope.capacity +=f;
-
+        $scope.capacity = parseFloat($scope.capacity);
+        $scope.capacity += parseFloat(f);
+        $scope.capacity = $scope.capacity.toFixed(3);
+        $scope.capacity = Math.max(0,$scope.capacity);
+        $scope.updateFlow();
     };
+
 
     $scope.setDirection = function(f){
         $scope.direction = f;
@@ -66,21 +76,27 @@ angular.module('ReossGui.wet', [
 
 
     $scope.updateFlow = function(){
+        $scope.capacity = parseFloat($scope.capacity);
+        $scope.size = parseFloat($scope.size);
+        $scope.flow = parseFloat($scope.flow);
+
         // compute steps 
-        for (var i=0;i<values;i++){
+        for (var i=0;i<values.length;i++){
             var o = values[i];
             if (o.vol == $scope.capacity && o.diam == $scope.size ) {
-                $scope.microsteps = o.steps;
+                console.log('found microsteps');
+                $scope.microsteps = parseFloat(o.steps) * $scope.flow / 100;
+                $scope.microsteps = $scope.microsteps.toFixed(3);
                 break;
             }
-
         }
+
     };
 
-    $scope.startExtruding = function(){
+    $scope.startExtruding = function(direction){
         // compute steps from microsteps
-        var steps = $scope.microsteps / 128;
-        var direction = 0;
+        // var steps = //$scope.microsteps / 128;
+        var steps = $scope.microsteps;
         pump.run( direction, steps, function(){
             // alert("Yeah");
         });
@@ -97,6 +113,8 @@ angular.module('ReossGui.wet', [
     $scope.updateStatus = function(){
 
     };
+
+    $scope.updateFlow();
 
 
 }]);
