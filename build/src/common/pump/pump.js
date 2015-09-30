@@ -11,7 +11,8 @@ angular.module('pump', [])
                 'Content-Type': resource.content_type,
                 'Access-Control-Allow-Origin': '*'
             },
-            data: resource.data
+            data: resource.data,
+            responseType: 'json'
         };
 
         return req;
@@ -21,6 +22,7 @@ angular.module('pump', [])
 
         var req = buildHTTPRequest(res);
         $http(req).then(function(response) {
+            console.log(response.data);
             cb(response.data);
 
         }, function() {
@@ -43,7 +45,7 @@ angular.module('pump', [])
         getRequest({
             url: Connection.API_ENDPOINT + "/pump/driver",
             method: "POST",
-            // content_type: 'application/json',
+            content_type: 'application/json',
             data: data
         }, cb);
     };
@@ -57,7 +59,7 @@ angular.module('pump', [])
         getRequest({
             url: Connection.API_ENDPOINT + "/pump/driver",
             method: "POST",
-            // content_type: 'application/json',
+            content_type: 'application/json',
             data: data
         }, cb);
     };
@@ -70,9 +72,8 @@ angular.module('pump', [])
         getRequest({
             url: Connection.API_ENDPOINT + "/pump/driver",
             method: "POST",
-            // content_type: 'application/json',
+            content_type: 'application/json',
             data: data
-                    
         }, cb);
     };
 
