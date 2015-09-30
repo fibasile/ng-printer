@@ -27,7 +27,7 @@ angular.module('ReossGui.wet', [
 /**
  * And of course we define a controller for our route.
  */
-.controller('WetCtrl', ['$scope', 'OctoPrint', 'pump', function WetCtrl($scope, OctoPrint, pump) {
+.controller('WetCtrl', ['$scope', 'OctoPrint', 'pump', '$interval', function WetCtrl($scope, OctoPrint, pump, $interval) {
 
 
     $scope.flow = 100;
@@ -35,6 +35,7 @@ angular.module('ReossGui.wet', [
     $scope.capacity = 1;
     $scope.direction = 0;
     $scope.microsteps =  0;
+    $scope.status = "idle";
 
 
     var values = [
@@ -112,9 +113,20 @@ angular.module('ReossGui.wet', [
 
     $scope.updateStatus = function(){
 
+        pump.status( function(status){
+            if (typeof(status.status) !== undefined) {
+                $scope.status = status.status;
+            }
+            console.log("status " + status);
+        });
+
     };
 
     $scope.updateFlow();
+
+    $interval(function(){
+        $scope.updateStatus();
+    },1000);
 
 
 }]);

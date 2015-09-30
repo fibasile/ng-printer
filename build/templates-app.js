@@ -645,6 +645,9 @@ angular.module("wet/wet.tpl.html", []).run(["$templateCache", function($template
     "        <div class=\"well\">\n" +
     "            <label>Current speed:</label>\n" +
     "            {{ microsteps }} step/s\n" +
+    "            <br>\n" +
+    "            <label>Status:</label>\n" +
+    "            <strong>{{ status }}</strong>\n" +
     "    </div>\n" +
     "    <div class=\"panel panel-default\">\n" +
     "        <div class=\"panel-heading\">Control</div>\n" +
