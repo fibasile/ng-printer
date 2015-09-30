@@ -21,6 +21,7 @@ angular.module('pump', [])
 
         var req = buildHTTPRequest(res);
         $http(req).then(function(response) {
+            console.log(response.data);
             cb(response.data);
 
         }, function() {
