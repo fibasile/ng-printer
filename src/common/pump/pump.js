@@ -11,7 +11,8 @@ angular.module('pump', [])
                 'Content-Type': resource.content_type,
                 'Access-Control-Allow-Origin': '*'
             },
-            data: resource.data
+            data: resource.data,
+            responseType: 'json'
         };
 
         return req;
@@ -34,12 +35,12 @@ angular.module('pump', [])
 
 
     var Connection = {};
-	Connection.API_ENDPOINT = "http://reoss.local";
+    Connection.API_ENDPOINT = "http://reoss.local";
 
     Connection.run = function(direction, steps, cb) {
         var data = {
             "cmd": "run",
-            "param": direction  + " " + steps
+            "param": direction + " " + steps
         };
         getRequest({
             url: Connection.API_ENDPOINT + "/pump/driver",
@@ -50,7 +51,7 @@ angular.module('pump', [])
     };
 
 
-    Connection.stop = function( cb) {
+    Connection.stop = function(cb) {
         var data = {
             "cmd": "stop",
             "param": ""
@@ -63,7 +64,7 @@ angular.module('pump', [])
         }, cb);
     };
 
-    Connection.status = function( cb) {
+    Connection.status = function(cb) {
         var data = {
             "cmd": "status",
             "param": ""
@@ -73,7 +74,7 @@ angular.module('pump', [])
             method: "POST",
             // content_type: 'application/json',
             data: data
-                    
+
         }, cb);
     };
 

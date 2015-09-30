@@ -36,6 +36,17 @@ angular.module('ReossGui.wet', [
     $scope.direction = 0;
     $scope.microsteps =  0;
 
+
+    var values = [
+        {vol: 0.1, diam: 5, steps: 0.283},
+        {vol: 0.1, diam: 10, steps: 0.070},
+        {vol: 0.3, diam: 5, steps: 0.849},
+        {vol: 0.3, diam: 10, steps: 0.212},
+        {vol: 0.5, diam: 5, steps: 1.415},
+        {vol: 0.5, diam: 10, steps: 0.353},
+        {vol: 1, diam: 10, steps: 0.707}
+    ];
+
     $scope.setFlow = function(f){
         $scope.flow += f;
     };
@@ -56,6 +67,14 @@ angular.module('ReossGui.wet', [
 
     $scope.updateFlow = function(){
         // compute steps 
+        for (var i=0;i<values;i++){
+            var o = values[i];
+            if (o.vol == $scope.capacity && o.diam == $scope.size ) {
+                $scope.microsteps = o.steps;
+                break;
+            }
+
+        }
     };
 
     $scope.startExtruding = function(){
@@ -75,6 +94,9 @@ angular.module('ReossGui.wet', [
         });
     };
 
+    $scope.updateStatus = function(){
+
+    };
 
 
 }]);
