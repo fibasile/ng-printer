@@ -114,6 +114,10 @@ angular.module('ReossGui.wet', [
     $scope.updateStatus = function(){
 
         pump.status( function(status){
+            if (status == null){
+                console.log("Cannot read status");
+                return;
+            }
             if (typeof(status.status) !== undefined) {
                 $scope.status = status.status;
             }
