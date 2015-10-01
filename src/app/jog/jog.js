@@ -93,8 +93,16 @@ angular.module( 'ReossGui.jog', [
     };
 
 
+    $scope.setTemperature = function(temp){
+      OctoPrint.setTemperature(temp, function(){
+
+
+      });
+    };
+
+
     $scope.extrude = function(){
-      OctoPrint.extrude(extrude_flow, function(){
+      OctoPrint.extrude($scope.extrude_flow, function(){
 
 
       });
@@ -103,7 +111,7 @@ angular.module( 'ReossGui.jog', [
 
 
     $scope.retract = function(){
-      OctoPrint.retract(retract_flow, function(){
+      OctoPrint.retract($scope.extrude_flow, function(){
 
 
       });

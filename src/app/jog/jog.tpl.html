@@ -32,7 +32,7 @@
                             </table>
                         </div>
                         <div class="col-sm-5">
-                            <label>Distance</label>
+                            <label>Distance</label><br/>
                                 <div class="btn-group" data-toggle="buttons-radio" id="jog_distance">
                                 <button type="button" class="btn btn-primary" ng-class="{'active' : (jogScale == 0.1)}" ng-click="setJogScale(0.1)">0.1</button>
                                 <button type="button" class="btn btn-primary" ng-class="{'active' : (jogScale == 1)}" ng-click="setJogScale(1)">1</button>
@@ -41,12 +41,10 @@
                             </div>
                             <hr/>
                             <div class="form-group">
-                                <br/>
                                 <rzslider rz-slider-model="feed_rate" rz-slider-floor="0" rz-slider-ceil="200"></rzslider>
                             </div>
                             <label>Feed: <span class="label label-default">{{ feed_rate }}%</span> </label>
-                            
-                        </div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -55,14 +53,21 @@
     <div class="col-sm-3">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <label>Tool</label>
+                <label>Extruder</label>
             </div>
             <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-6">
 <!--                 <a class="btn btn-default btn-block btn-lg" ui-sref="extruder"> Change tool</a>
- -->                       <a class="btn btn-default btn-block  btn-lg" ng-click="extrude()"> Extrude</a>
-                <a class="btn btn-default btn-block  btn-lg" ngclick="retract"> Retract</a> 
-                <br/>
-
+ -->                       <a class="btn btn-default btn-block  btn-lg" ng-click="extrude()"> Extr.</a>
+                <a class="btn btn-default btn-block  btn-lg" ngclick="retract"> Retr.</a> 
+                </div>
+                <div class="col-sm-6">
+                    <a class="btn btn-default btn-block btn-lg" ng-click="setTemperature(190)">190</a>
+                    <a class="btn btn-default btn-block btn-lg" ng-click="setTemperature(0)">Off</a>
+                </div>
+            </div>
+            <br>
                 <rzslider rz-slider-model="extrude_flow" rz-slider-floor="0" 
      rz-slider-ceil="200" 
      ng-model="extrude_flow">

@@ -328,7 +328,7 @@ angular.module("jog/jog.tpl.html", []).run(["$templateCache", function($template
     "                            </table>\n" +
     "                        </div>\n" +
     "                        <div class=\"col-sm-5\">\n" +
-    "                            <label>Distance</label>\n" +
+    "                            <label>Distance</label><br/>\n" +
     "                                <div class=\"btn-group\" data-toggle=\"buttons-radio\" id=\"jog_distance\">\n" +
     "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' : (jogScale == 0.1)}\" ng-click=\"setJogScale(0.1)\">0.1</button>\n" +
     "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' : (jogScale == 1)}\" ng-click=\"setJogScale(1)\">1</button>\n" +
@@ -337,12 +337,10 @@ angular.module("jog/jog.tpl.html", []).run(["$templateCache", function($template
     "                            </div>\n" +
     "                            <hr/>\n" +
     "                            <div class=\"form-group\">\n" +
-    "                                <br/>\n" +
     "                                <rzslider rz-slider-model=\"feed_rate\" rz-slider-floor=\"0\" rz-slider-ceil=\"200\"></rzslider>\n" +
     "                            </div>\n" +
     "                            <label>Feed: <span class=\"label label-default\">{{ feed_rate }}%</span> </label>\n" +
-    "                            \n" +
-    "                        </div>\n" +
+    "                            </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -351,14 +349,21 @@ angular.module("jog/jog.tpl.html", []).run(["$templateCache", function($template
     "    <div class=\"col-sm-3\">\n" +
     "        <div class=\"panel panel-default\">\n" +
     "            <div class=\"panel-heading\">\n" +
-    "                <label>Tool</label>\n" +
+    "                <label>Extruder</label>\n" +
     "            </div>\n" +
     "            <div class=\"panel-body\">\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6\">\n" +
     "<!--                 <a class=\"btn btn-default btn-block btn-lg\" ui-sref=\"extruder\"> Change tool</a>\n" +
-    " -->                       <a class=\"btn btn-default btn-block  btn-lg\" ng-click=\"extrude()\"> Extrude</a>\n" +
-    "                <a class=\"btn btn-default btn-block  btn-lg\" ngclick=\"retract\"> Retract</a> \n" +
-    "                <br/>\n" +
-    "\n" +
+    " -->                       <a class=\"btn btn-default btn-block  btn-lg\" ng-click=\"extrude()\"> Extr.</a>\n" +
+    "                <a class=\"btn btn-default btn-block  btn-lg\" ngclick=\"retract\"> Retr.</a> \n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-6\">\n" +
+    "                    <a class=\"btn btn-default btn-block btn-lg\" ng-click=\"setTemperature(190)\">190</a>\n" +
+    "                    <a class=\"btn btn-default btn-block btn-lg\" ng-click=\"setTemperature(0)\">Off</a>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <br>\n" +
     "                <rzslider rz-slider-model=\"extrude_flow\" rz-slider-floor=\"0\" \n" +
     "     rz-slider-ceil=\"200\" \n" +
     "     ng-model=\"extrude_flow\">\n" +

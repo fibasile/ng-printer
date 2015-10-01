@@ -163,10 +163,10 @@ angular.module('OctoPrint', [])
     };
 
     Connection.jogHead = function(args, cb) {
-    
+
         var delta = args;
         var k = args.scale;
-    
+
         var data = {
             "command": "jog",
             x: 0,
@@ -196,28 +196,29 @@ angular.module('OctoPrint', [])
     };
 
 
-    Connection.homeHead = function(axis,cb){
-    
-       getRequest({
+    Connection.homeHead = function(axis, cb) {
+
+        getRequest({
             url: Connection.API_ENDPOINT + '/api/printer/printhead',
             method: "POST",
             content_type: 'application/json',
             data: {
-             "command" : "home",
-             "axes": axis
-       }}, cb);
+                "command": "home",
+                "axes": axis
+            }
+        }, cb);
     };
 
 
 
-    Connection.printOperation = function(op, cb){
+    Connection.printOperation = function(op, cb) {
 
         // op is start, restart, pause, cancel
         if (op != 'start' &&
             op != 'stop' &&
             op != 'restart' &&
             op != 'pause' &&
-            op != 'cancel'){
+            op != 'cancel') {
 
             return cb(null);
         }
@@ -228,15 +229,16 @@ angular.module('OctoPrint', [])
             method: "POST",
             content_type: 'application/json',
             data: {
-             "command" : op
-       }}, cb);
+                "command": op
+            }
+        }, cb);
 
 
     };
 
 
 
-    Connection.extrude = function(flow, cb){
+    Connection.extrude = function(flow, cb) {
 
         var rate = flow * 10;
 
@@ -248,20 +250,20 @@ angular.module('OctoPrint', [])
             url: Connection.API_ENDPOINT + '/api/printer/command',
             method: "POST",
             content_type: 'application/json',
-            data:{
+            data: {
                 "commands": [
                     "G91",
                     "G1 E10 F" + rate,
                     "G90"
                 ]
-            }},cb
-        );
+            }
+        }, cb);
 
 
     };
 
 
-    Connection.retract = function(flow, cb){
+    Connection.retract = function(flow, cb) {
 
         var rate = flow * 10;
 
@@ -275,20 +277,41 @@ angular.module('OctoPrint', [])
             url: Connection.API_ENDPOINT + '/api/printer/command',
             method: "POST",
             content_type: 'application/json',
-            data:{
+            data: {
                 "commands": [
                     "G91",
                     "G1 E-10 F" + rate,
                     "G90"
                 ]
-            }},cb
-        );
+            }
+        }, cb);
 
 
     };
 
 
-    Connection.getTemp = function(cb){
+    Connection.setTemperature = function(temp, cb) {
+
+        getRequest({
+                url: Connection.API_ENDPOINT + '/api/printer/tool',
+                method: "POST",
+                content_type: 'application/json',
+                data: {
+                    "command": "target",
+                    "targets": {
+                        "tool0": temp
+                    }
+                }
+            },
+            cb
+        );
+
+
+
+    };
+
+
+    Connection.getTemp = function(cb) {
         getRequest({
             url: Connection.API_ENDPOINT + "/api/printer/tool?history=true&limit=1",
             method: "GET"
