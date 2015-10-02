@@ -208,22 +208,23 @@ angular.module("extruder/extruder.tpl.html", []).run(["$templateCache", function
     "                    Zero Extruder\n" +
     "                </div>\n" +
     "                <div class=\"panel-body\">\n" +
-    "                    <p>Move the syringe to the desired zero using the jog controls</p>\n" +
-    "                    <p>When you are done click continue</p>\n" +
-    "                    <p><label>Distance</label><br/>\n" +
-    "                                <div class=\"btn-group\" data-toggle=\"buttons-radio\" id=\"jog_distance\">\n" +
+    "                    <p>Move the syringe to the desired zero using the jog controls and click continue</p>\n" +
+    "                    <p>\n" +
+    "                        <div class=\"btn-group\" data-toggle=\"buttons-radio\" id=\"jog_distance\">\n" +
     "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' : (jogScale == 0.1)}\" ng-click=\"setJogScale(0.1)\">0.1</button>\n" +
     "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' : (jogScale == 1)}\" ng-click=\"setJogScale(1)\">1</button>\n" +
     "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' :(jogScale == 10)}\" ng-click=\"setJogScale(10)\">10</button>\n" +
     "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' :(jogScale == 100)}\" ng-click=\"setJogScale(100)\">100</button>\n" +
     "                            </div>\n" +
     "                    </p>\n" +
-    "                    <p>\n" +
+    "                    <div class=\"row\">\n" +
+    "                        <div class=\"col-sm-6\">\n" +
     "                        <button class=\"btn btn-default btn-lg btn-block\" ng-click=\"jog({z: 1})\">Z+</button>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"col-sm-6\">\n" +
     "                        <button class=\"btn btn-default btn-lg btn-block\" ng-click=\"jog({z: -1})\">Z-</button>\n" +
-    "                    </p>\n" +
-    "\n" +
-    "\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <button class=\"btn btn-warning btn-lg btn-block\" ng-click=\"wetExtruderSetZero()\">Continue</button>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -575,7 +576,12 @@ angular.module("wet/wet.tpl.html", []).run(["$templateCache", function($template
     "                        <label>Model</label>\n" +
     "                        <form class=\"form form-inline\">\n" +
     "                            <select ng-model=\"size\" convert-to-number class=\"form-control input-lg\" ng-change=\"updateFlow()\" required>\n" +
-    "                                <option ng-repeat=\"v in values\" value=\"{{ v.diam }}\">{{v.label}}</option>\n" +
+    "                                <option value=\"20\">SOCOREX 20 mL</option>\n" +
+    "                                <option value=\"10\">SOCOREX 10 mL</option>\n" +
+    "                                <option value=\"5\">HAMILTON #1005 5mL</option>\n" +
+    "                                <option value=\"12\">TERUMO 12 mL</option>\n" +
+    "                                <option value=\"6\">TERUMO 6 mL</option>\n" +
+    "                                <!-- <option ng-repeat=\"v in values\" value=\"{{ v.diam }}\">{{v.label}}</option> -->\n" +
     "                            </select>\n" +
     "                        </form>\n" +
     "                    </div>\n" +

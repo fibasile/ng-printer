@@ -8,7 +8,12 @@
                         <label>Model</label>
                         <form class="form form-inline">
                             <select ng-model="size" convert-to-number class="form-control input-lg" ng-change="updateFlow()" required>
-                                <option ng-repeat="v in values" value="{{ v.diam }}">{{v.label}}</option>
+                                <option value="20">SOCOREX 20 mL</option>
+                                <option value="10">SOCOREX 10 mL</option>
+                                <option value="5">HAMILTON #1005 5mL</option>
+                                <option value="12">TERUMO 12 mL</option>
+                                <option value="6">TERUMO 6 mL</option>
+                                <!-- <option ng-repeat="v in values" value="{{ v.diam }}">{{v.label}}</option> -->
                             </select>
                         </form>
                     </div>

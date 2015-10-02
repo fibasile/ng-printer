@@ -53,7 +53,7 @@ angular.module('ReossGui.extruder', [
     
     };
 
-    
+
 
     var defaultWizard = function() {
         return {
@@ -125,8 +125,9 @@ angular.module('ReossGui.extruder', [
     $scope.wetExtruderSetZero = function(){
         OctoPrint.resetZero( function(){
             console.log("Zero head done");
-            $scope.wizard.step = "select_success";
-
+            OctoPrint.parkHead(function(){
+                $scope.wizard.step = "select_success";
+            });
         });
 
     };

@@ -357,7 +357,7 @@ angular.module('OctoPrint', [])
             content_type: 'application/json',
             data: {
                 "commands": [
-                    "G92"
+                    "G92 Z0"
                 ]
             }
         }, cb);
