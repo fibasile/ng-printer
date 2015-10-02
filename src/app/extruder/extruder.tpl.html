@@ -5,16 +5,13 @@
             <div class="attribute">
                 <label>Type: {{ currentExtruder.kind }}</label>
             </div>
-            <div class="attribute" ng-repeat="(attr,value) in currentExtruder.attributes">
-                <label>{{ attr }}: {{ value }}</label>
-            </div>
             <hr>
-            <button style="width:100%" class="btn btn-lg btn-success" ng-click="startWizard()" ng-show="wizard.step == null">Select new extruder</button>
+            <button style="width:100%" class="btn btn-lg btn-success  btn-block" ng-click="startWizard()" ng-show="wizard.step == null">Select new extruder</button>
         </div>
     </div>
     <div class="col-sm-6 col-xs-12">
         <section id="select_new_header" ng-show="wizard.step">
-            <h4>Select new estruder</h4>
+            <h4>Select new extruder</h4>
         </section>
         <section id="select_home_head" ng-show="wizard.step == 'select_home_head'">
             <div class="panel panel-default">
@@ -29,8 +26,8 @@
                     Extruder type
                 </div>
                 <div class="panel-body">
-                    <button class="btn btn-default btn-lg" ng-click="selectType('wet')">WET</button>
-                    <button class="btn btn-default btn-lg pull-right" ng-click="selectType('fuse')">FUSE</button>
+                    <button class="btn btn-primary btn-lg btn-block" ng-click="selectType('wet')">WET</button>
+                    <button class="btn btn-success btn-lg btn-block" ng-click="selectType('fuse')">FUSE</button>
                 </div>
             </div>
         </section>
@@ -40,16 +37,9 @@
                     Wet Estruder
                 </div>
                 <div class="panel-body">
-                    <form accept-charset="utf-8">
-                        <label>Select preset</label>
-                        <div class="form-group">
-                            <select name="wet_preset" ng-model="preset" class="form-control">
-                                <option value="10mm">10mm</option>
-                                option
-                            </select>
-                        </div>
-                    </form>
-                    <button class="btn btn-warning btn-lg" ng-click="startToolChange()">Start tool change</button>
+                     <div class="panel-body">
+                    Install the wet syringe and click continue<br/><br/>
+                    <button class="btn btn-warning btn-lg  btn-block" ng-click="wetExtruderInstalled()">Continue</button>
                 </div>
             </div>
         </section>
@@ -59,16 +49,8 @@
                     Fuse Estruder
                 </div>
                 <div class="panel-body">
-                    <form accept-charset="utf-8">
-                        <label>Select preset</label>
-                        <div class="form-group">
-                            <select name="fuse_preset" ng-model="preset" class="form-control">
-                                <option value="">10mm</option>
-                                option
-                            </select>
-                        </div>
-                    </form>
-                    <button class="btn btn-warning btn-lg" ng-click="startToolChange()">Start tool change</button>
+                    Install the fuse extruder and click continue<br/><br/>
+                    <button class="btn btn-warning btn-lg  btn-block" ng-click="fuseExtruderInstalled()">Continue</button>
                 </div>
             </div>
         </section>
@@ -78,55 +60,29 @@
                     Zero Extruder
                 </div>
                 <div class="panel-body">
-                    <form class="form form-inline" accept-charset="utf-8">
-                        <label>Move the Extruder to the desired zero</label>
-                        <div class="form-group">
-                            <label>Z:
-                                <input type="number" class="form-control" ng-model="extruder_position" size="3" step="any">
-                                <button class="btn btn-primary">Update</button>
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label>Scale:</label>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" class="form-control" ng-model="scale" ng-value="0.001">1x
-                                </label>
+                    <p>Move the syringe to the desired zero using the jog controls</p>
+                    <p>When you are done click continue</p>
+                    <p><label>Distance</label><br/>
+                                <div class="btn-group" data-toggle="buttons-radio" id="jog_distance">
+                                <button type="button" class="btn btn-primary" ng-class="{'active' : (jogScale == 0.1)}" ng-click="setJogScale(0.1)">0.1</button>
+                                <button type="button" class="btn btn-primary" ng-class="{'active' : (jogScale == 1)}" ng-click="setJogScale(1)">1</button>
+                                <button type="button" class="btn btn-primary" ng-class="{'active' :(jogScale == 10)}" ng-click="setJogScale(10)">10</button>
+                                <button type="button" class="btn btn-primary" ng-class="{'active' :(jogScale == 100)}" ng-click="setJogScale(100)">100</button>
                             </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" class="form-control" ng-model="scale" ng-value="0.01">10x</label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" class="form-control" ng-model="scale" ng-value="0.1">100x</label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" class="form-control" ng-model="scale" ng-value="1">1000x</label>
-                            </div>
-                        </div>
-                        <div class="form-group text-center">
-                            <label> Move:</label>
-                            <button class="btn btn-primary" ng-click="updatePosition(scale)">Up</button>
-                            <button class="btn btn-primary" ng-click="updatePosition(-scale)">Down</button>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <progress value="40" max="100"></progress>
-                            </div>
-                            <div class="col-sm-6">
-                                <button class="btn btn-warning pull-right" ng-click="saveZero()">Save position</button>
-                            </div>
-                        </div>
-                    </form>
+                    </p>
+                    <p>
+                        <button class="btn btn-default btn-lg btn-block" ng-click="jog({z: 1})">Z+</button>
+                        <button class="btn btn-default btn-lg btn-block" ng-click="jog({z: -1})">Z-</button>
+                    </p>
+
+
+                    <button class="btn btn-warning btn-lg btn-block" ng-click="wetExtruderSetZero()">Continue</button>
                 </div>
             </div>
         </section>
         <section id="select_success" ng-show="wizard.step == 'select_success'">
             <div class="alert alert-success" role="alert">
-                <p>Settings saved successfully!</p>
+                <p>Settings saved successfully! You can start printing</p>
             </div>
             <button class="btn btn-success pull-right" ng-click="wizard.step = null">Dismiss</button>
         </section>

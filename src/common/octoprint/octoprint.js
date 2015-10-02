@@ -306,9 +306,83 @@ angular.module('OctoPrint', [])
             cb
         );
 
+    };
 
+
+    Connection.goHome = function(cb){
+
+
+        getRequest({
+            url: Connection.API_ENDPOINT + '/api/printer/command',
+            method: "POST",
+            content_type: 'application/json',
+            data: {
+                "commands": [
+                    "G28"
+                ]
+            }
+        }, cb);
 
     };
+
+
+
+
+
+    Connection.goHomeWet = function(cb){
+
+
+        getRequest({
+            url: Connection.API_ENDPOINT + '/api/printer/command',
+            method: "POST",
+            content_type: 'application/json',
+            data: {
+                "commands": [
+                    "G1 X0 Y0 Z100 F2000"
+                ]
+            }
+        }, cb);
+
+    };
+
+
+
+
+
+    Connection.resetZero = function(cb){
+
+        getRequest({
+            url: Connection.API_ENDPOINT + '/api/printer/command',
+            method: "POST",
+            content_type: 'application/json',
+            data: {
+                "commands": [
+                    "G92"
+                ]
+            }
+        }, cb);
+
+    };
+
+
+
+    Connection.parkHead = function(cb){
+
+
+        getRequest({
+            url: Connection.API_ENDPOINT + '/api/printer/command',
+            method: "POST",
+            content_type: 'application/json',
+            data: {
+                "commands": [
+                    "G1 Z100 F2000",
+                    "G1 X20 Y20 F1000"
+                ]
+            }
+        }, cb);
+
+    };
+
 
 
     Connection.getTemp = function(cb) {

@@ -38,8 +38,8 @@ angular.module('ReossGui.wet', [
     $scope.status = "idle";
 
 
-    var values = [
-        {vol: 0.1, diam: 5, steps: 0.283},
+    $scope.values = [
+  /*      {vol: 0.1, diam: 5, steps: 0.283},
         {vol: 0.1, diam: 10, steps: 0.070},
         {vol: 0.3, diam: 5, steps: 0.849},
         {vol: 0.3, diam: 10, steps: 0.212},
@@ -47,6 +47,22 @@ angular.module('ReossGui.wet', [
         {vol: 0.5, diam: 10, steps: 0.353},
         {vol: 1, diam: 10, steps: 0.707},
         {vol: 1, diam: 5, steps: 2.830}
+        */
+        { label: 'SOCOREX 20 mL', diam: '20', 'vol': 0.1, 'steps' : 0.018},
+        { label: 'SOCOREX 20 mL', diam: '20', 'vol': 0.5, 'steps' : 0.092},
+        { label: 'SOCOREX 20 mL', diam: '20', 'vol': 1, 'steps' : 0.184},
+        { label: 'SOCOREX 10 mL', diam: '10', 'vol': 0.1, 'steps' : 0.032},
+        { label: 'SOCOREX 10 mL', diam: '10', 'vol': 0.5, 'steps' : 0.161},
+        { label: 'SOCOREX 10 mL', diam: '10', 'vol': 1, 'steps' : 0.322},
+        { label: 'Hamilton #1005 5 mL', diam: '5', 'vol': 0.1, 'steps' : 0.067},
+        { label: 'Hamilton #1005 5 mL', diam: '5', 'vol': 0.5, 'steps' : 0.339},
+        { label: 'Hamilton #1005 5 mL', diam: '5', 'vol': 1, 'steps' : 0.679},
+        { label: 'Terumo 12 mL', diam: '12', 'vol': 0.1, 'steps' : 0.027},
+        { label: 'Terumo 12 mL', diam: '12', 'vol': 0.5, 'steps' : 0.138},
+        { label: 'Terumo 12 mL', diam: '12', 'vol': 1, 'steps' : 0.276},
+        { label: 'Terumo 6 mL', diam: '6', 'vol': 0.1, 'steps' : 0.041},
+        { label: 'Terumo 6 mL', diam: '6', 'vol': 0.5, 'steps' : 0.209},
+        { label: 'Terumo 6 mL', diam: '6', 'vol': 1, 'steps' : 0.418}
     ];
 
     $scope.setFlow = function(f){    
@@ -82,8 +98,8 @@ angular.module('ReossGui.wet', [
         $scope.flow = parseFloat($scope.flow);
 
         // compute steps 
-        for (var i=0;i<values.length;i++){
-            var o = values[i];
+        for (var i=0;i<$scope.values.length;i++){
+            var o = $scope.values[i];
             if (o.vol == $scope.capacity && o.diam == $scope.size ) {
                 console.log('found microsteps');
                 $scope.microsteps = parseFloat(o.steps) * $scope.flow / 100;

@@ -153,16 +153,13 @@ angular.module("extruder/extruder.tpl.html", []).run(["$templateCache", function
     "            <div class=\"attribute\">\n" +
     "                <label>Type: {{ currentExtruder.kind }}</label>\n" +
     "            </div>\n" +
-    "            <div class=\"attribute\" ng-repeat=\"(attr,value) in currentExtruder.attributes\">\n" +
-    "                <label>{{ attr }}: {{ value }}</label>\n" +
-    "            </div>\n" +
     "            <hr>\n" +
-    "            <button style=\"width:100%\" class=\"btn btn-lg btn-success\" ng-click=\"startWizard()\" ng-show=\"wizard.step == null\">Select new extruder</button>\n" +
+    "            <button style=\"width:100%\" class=\"btn btn-lg btn-success  btn-block\" ng-click=\"startWizard()\" ng-show=\"wizard.step == null\">Select new extruder</button>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"col-sm-6 col-xs-12\">\n" +
     "        <section id=\"select_new_header\" ng-show=\"wizard.step\">\n" +
-    "            <h4>Select new estruder</h4>\n" +
+    "            <h4>Select new extruder</h4>\n" +
     "        </section>\n" +
     "        <section id=\"select_home_head\" ng-show=\"wizard.step == 'select_home_head'\">\n" +
     "            <div class=\"panel panel-default\">\n" +
@@ -177,8 +174,8 @@ angular.module("extruder/extruder.tpl.html", []).run(["$templateCache", function
     "                    Extruder type\n" +
     "                </div>\n" +
     "                <div class=\"panel-body\">\n" +
-    "                    <button class=\"btn btn-default btn-lg\" ng-click=\"selectType('wet')\">WET</button>\n" +
-    "                    <button class=\"btn btn-default btn-lg pull-right\" ng-click=\"selectType('fuse')\">FUSE</button>\n" +
+    "                    <button class=\"btn btn-primary btn-lg btn-block\" ng-click=\"selectType('wet')\">WET</button>\n" +
+    "                    <button class=\"btn btn-success btn-lg btn-block\" ng-click=\"selectType('fuse')\">FUSE</button>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </section>\n" +
@@ -188,16 +185,9 @@ angular.module("extruder/extruder.tpl.html", []).run(["$templateCache", function
     "                    Wet Estruder\n" +
     "                </div>\n" +
     "                <div class=\"panel-body\">\n" +
-    "                    <form accept-charset=\"utf-8\">\n" +
-    "                        <label>Select preset</label>\n" +
-    "                        <div class=\"form-group\">\n" +
-    "                            <select name=\"wet_preset\" ng-model=\"preset\" class=\"form-control\">\n" +
-    "                                <option value=\"10mm\">10mm</option>\n" +
-    "                                option\n" +
-    "                            </select>\n" +
-    "                        </div>\n" +
-    "                    </form>\n" +
-    "                    <button class=\"btn btn-warning btn-lg\" ng-click=\"startToolChange()\">Start tool change</button>\n" +
+    "                     <div class=\"panel-body\">\n" +
+    "                    Install the wet syringe and click continue<br/><br/>\n" +
+    "                    <button class=\"btn btn-warning btn-lg  btn-block\" ng-click=\"wetExtruderInstalled()\">Continue</button>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </section>\n" +
@@ -207,16 +197,8 @@ angular.module("extruder/extruder.tpl.html", []).run(["$templateCache", function
     "                    Fuse Estruder\n" +
     "                </div>\n" +
     "                <div class=\"panel-body\">\n" +
-    "                    <form accept-charset=\"utf-8\">\n" +
-    "                        <label>Select preset</label>\n" +
-    "                        <div class=\"form-group\">\n" +
-    "                            <select name=\"fuse_preset\" ng-model=\"preset\" class=\"form-control\">\n" +
-    "                                <option value=\"\">10mm</option>\n" +
-    "                                option\n" +
-    "                            </select>\n" +
-    "                        </div>\n" +
-    "                    </form>\n" +
-    "                    <button class=\"btn btn-warning btn-lg\" ng-click=\"startToolChange()\">Start tool change</button>\n" +
+    "                    Install the fuse extruder and click continue<br/><br/>\n" +
+    "                    <button class=\"btn btn-warning btn-lg  btn-block\" ng-click=\"fuseExtruderInstalled()\">Continue</button>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </section>\n" +
@@ -226,55 +208,29 @@ angular.module("extruder/extruder.tpl.html", []).run(["$templateCache", function
     "                    Zero Extruder\n" +
     "                </div>\n" +
     "                <div class=\"panel-body\">\n" +
-    "                    <form class=\"form form-inline\" accept-charset=\"utf-8\">\n" +
-    "                        <label>Move the Extruder to the desired zero</label>\n" +
-    "                        <div class=\"form-group\">\n" +
-    "                            <label>Z:\n" +
-    "                                <input type=\"number\" class=\"form-control\" ng-model=\"extruder_position\" size=\"3\" step=\"any\">\n" +
-    "                                <button class=\"btn btn-primary\">Update</button>\n" +
-    "                            </label>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"form-group\">\n" +
-    "                            <label>Scale:</label>\n" +
-    "                            <div class=\"radio\">\n" +
-    "                                <label>\n" +
-    "                                    <input type=\"radio\" class=\"form-control\" ng-model=\"scale\" ng-value=\"0.001\">1x\n" +
-    "                                </label>\n" +
+    "                    <p>Move the syringe to the desired zero using the jog controls</p>\n" +
+    "                    <p>When you are done click continue</p>\n" +
+    "                    <p><label>Distance</label><br/>\n" +
+    "                                <div class=\"btn-group\" data-toggle=\"buttons-radio\" id=\"jog_distance\">\n" +
+    "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' : (jogScale == 0.1)}\" ng-click=\"setJogScale(0.1)\">0.1</button>\n" +
+    "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' : (jogScale == 1)}\" ng-click=\"setJogScale(1)\">1</button>\n" +
+    "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' :(jogScale == 10)}\" ng-click=\"setJogScale(10)\">10</button>\n" +
+    "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' :(jogScale == 100)}\" ng-click=\"setJogScale(100)\">100</button>\n" +
     "                            </div>\n" +
-    "                            <div class=\"radio\">\n" +
-    "                                <label>\n" +
-    "                                    <input type=\"radio\" class=\"form-control\" ng-model=\"scale\" ng-value=\"0.01\">10x</label>\n" +
-    "                            </div>\n" +
-    "                            <div class=\"radio\">\n" +
-    "                                <label>\n" +
-    "                                    <input type=\"radio\" class=\"form-control\" ng-model=\"scale\" ng-value=\"0.1\">100x</label>\n" +
-    "                            </div>\n" +
-    "                            <div class=\"radio\">\n" +
-    "                                <label>\n" +
-    "                                    <input type=\"radio\" class=\"form-control\" ng-model=\"scale\" ng-value=\"1\">1000x</label>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"form-group text-center\">\n" +
-    "                            <label> Move:</label>\n" +
-    "                            <button class=\"btn btn-primary\" ng-click=\"updatePosition(scale)\">Up</button>\n" +
-    "                            <button class=\"btn btn-primary\" ng-click=\"updatePosition(-scale)\">Down</button>\n" +
-    "                        </div>\n" +
-    "                        <hr>\n" +
-    "                        <div class=\"row\">\n" +
-    "                            <div class=\"col-sm-6\">\n" +
-    "                                <progress value=\"40\" max=\"100\"></progress>\n" +
-    "                            </div>\n" +
-    "                            <div class=\"col-sm-6\">\n" +
-    "                                <button class=\"btn btn-warning pull-right\" ng-click=\"saveZero()\">Save position</button>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </form>\n" +
+    "                    </p>\n" +
+    "                    <p>\n" +
+    "                        <button class=\"btn btn-default btn-lg btn-block\" ng-click=\"jog({z: 1})\">Z+</button>\n" +
+    "                        <button class=\"btn btn-default btn-lg btn-block\" ng-click=\"jog({z: -1})\">Z-</button>\n" +
+    "                    </p>\n" +
+    "\n" +
+    "\n" +
+    "                    <button class=\"btn btn-warning btn-lg btn-block\" ng-click=\"wetExtruderSetZero()\">Continue</button>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </section>\n" +
     "        <section id=\"select_success\" ng-show=\"wizard.step == 'select_success'\">\n" +
     "            <div class=\"alert alert-success\" role=\"alert\">\n" +
-    "                <p>Settings saved successfully!</p>\n" +
+    "                <p>Settings saved successfully! You can start printing</p>\n" +
     "            </div>\n" +
     "            <button class=\"btn btn-success pull-right\" ng-click=\"wizard.step = null\">Dismiss</button>\n" +
     "        </section>\n" +
@@ -614,60 +570,59 @@ angular.module("wet/wet.tpl.html", []).run(["$templateCache", function($template
     "        <div class=\"panel panel-default\">\n" +
     "            <div class=\"panel-heading\">Syringe Control</div>\n" +
     "            <div class=\"panel-body\">\n" +
-    "            <div class=\"row\">\n" +
-    "            <div class=\"col-sm-6\">\n" +
-    "                <label>Diameter (mm)</label>\n" +
-    "                <form class=\"form form-inline\">\n" +
-    "                    <select ng-model=\"size\" convert-to-number class=\"form-control input-lg\" ng-change=\"updateFlow()\" required>\n" +
-    "                        <option value=\"10\">10</option>\n" +
-    "                        <option value=\"5\">5</option>\n" +
-    "                    </select>\n" +
-    "                </form>\n" +
+    "                <div class=\"row\">\n" +
+    "                    <div class=\"col-sm-12\">\n" +
+    "                        <label>Model</label>\n" +
+    "                        <form class=\"form form-inline\">\n" +
+    "                            <select ng-model=\"size\" convert-to-number class=\"form-control input-lg\" ng-change=\"updateFlow()\" required>\n" +
+    "                                <option ng-repeat=\"v in values\" value=\"{{ v.diam }}\">{{v.label}}</option>\n" +
+    "                            </select>\n" +
+    "                        </form>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-sm-6\">\n" +
+    "                        <label>Volume (ml)</label>\n" +
+    "                        <form class=\"form form-inline\">\n" +
+    "                            <!-- <input class=\"form-control\" type=\"number\" disabled=\"true\" min=\"0\" max=\"200\" ng-model=\"capacity\" step=\"0.01\" ng-change=\"updateFlow()\"> -->\n" +
+    "                            <select class=\"form-control input-lg\" convert-to-number ng-model=\"capacity\" ng-change=\"updateFlow()\">\n" +
+    "                                <option value=\"0.1\">0.1</option>\n" +
+    "                                <option value=\"0.5\">0.5</option>\n" +
+    "                                <option value=\"1\">1</option>\n" +
+    "                            </select>\n" +
+    "                            <!-- <button class=\"btn btn-default btn-lg\" ng-click=\"setCapacity(0.1)\">+</button> -->\n" +
+    "                            <!-- <button class=\"btn btn-default btn-lg\" ng-click=\"setCapacity(-0.1)\">-</button> -->\n" +
+    "                        </form>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-sm-6\">\n" +
+    "                        <label>Flow (%)</label>\n" +
+    "                        <form class=\"form form-inline\">\n" +
+    "                            <input class=\"form-control\" disabled type=\"number\" min=\"0\" max=\"200\" ng-model=\"flow\" step=\"1\" ng-change=\"updateFlow()\"><br/>\n" +
+    "                            <button class=\"btn btn-default btn-lg\" ng-click=\"setFlow(1)\">+</button>\n" +
+    "                            <button class=\"btn btn-default btn-lg\" ng-click=\"setFlow(-1)\">-</button>\n" +
+    "                        </form>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <br/>\n" +
     "            </div>\n" +
-    "            <div class=\"col-sm-6\">\n" +
-    "            <label>Volume (ml)</label>\n" +
-    "            <form class=\"form form-inline\">\n" +
-    "                <!-- <input class=\"form-control\" type=\"number\" disabled=\"true\" min=\"0\" max=\"200\" ng-model=\"capacity\" step=\"0.01\" ng-change=\"updateFlow()\"> -->\n" +
-    "                <select class=\"form-control input-lg\" convert-to-number ng-model=\"capacity\" ng-change=\"updateFlow()\">\n" +
-    "                    <option value=\"0.1\">0.1</option>\n" +
-    "                    <option value=\"0.3\">0.3</option>\n" +
-    "                    <option value=\"0.5\">0.5</option>\n" +
-    "                    <option value=\"1\">1</option>\n" +
-    "                </select>\n" +
-    "                <!-- <button class=\"btn btn-default btn-lg\" ng-click=\"setCapacity(0.1)\">+</button> -->\n" +
-    "                <!-- <button class=\"btn btn-default btn-lg\" ng-click=\"setCapacity(-0.1)\">-</button> -->\n" +
-    "            </form>\n" +
-    "            </div>\n" +
-    "            </div>\n" +
-    "            <br/>\n" +
-    "                <label>Flow (%)</label>\n" +
-    "                            <form class=\"form form-inline\">\n" +
-    "                    <input class=\"form-control\" disabled type=\"number\" min=\"0\" max=\"200\" ng-model=\"flow\" step=\"1\" ng-change=\"updateFlow()\">\n" +
-    "                    <button class=\"btn btn-default btn-lg\" ng-click=\"setFlow(1)\">+</button>\n" +
-    "                    <button class=\"btn btn-default btn-lg\" ng-click=\"setFlow(-1)\">-</button>\n" +
-    "                </form>\n" +
-    "\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "</div>\n" +
-    "<div class=\"col-sm-6\">\n" +
-    "    <div class=\"well\">\n" +
-    "        <label>Current speed:</label>\n" +
-    "        {{ microsteps }} step/s\n" +
-    "        <br>\n" +
-    "        <label>Status:</label>\n" +
-    "        <strong>{{ status }}</strong>\n" +
-    "    </div>\n" +
-    "    <div class=\"panel panel-default\">\n" +
-    "        <div class=\"panel-heading\">Control</div>\n" +
-    "        <div class=\"panel-body\">\n" +
-    "            <!-- <button ng-click=\"updateFlow()\" class=\"btn btn-success btn-lg btn-block\">Update flow</button> -->\n" +
-    "            <button ng-click=\"startExtruding(1)\" class=\"btn btn-primary btn-lg btn-block\">Forward</button>\n" +
-    "            <button ng-click=\"startExtruding(0)\" class=\"btn btn-success btn-lg btn-block\">Reverse</button>\n" +
-    "            <button ng-click=\"stopExtruding()\" class=\"btn btn-danger btn-lg btn-block\">Stop</button>\n" +
+    "    <div class=\"col-sm-6\">\n" +
+    "        <div class=\"well\">\n" +
+    "            <label>Current speed:</label>\n" +
+    "            {{ microsteps }} step/s\n" +
+    "            <br>\n" +
+    "            <label>Status:</label>\n" +
+    "            <strong>{{ status }}</strong>\n" +
+    "        </div>\n" +
+    "        <div class=\"panel panel-default\">\n" +
+    "            <div class=\"panel-heading\">Control</div>\n" +
+    "            <div class=\"panel-body\">\n" +
+    "                <!-- <button ng-click=\"updateFlow()\" class=\"btn btn-success btn-lg btn-block\">Update flow</button> -->\n" +
+    "                <button ng-click=\"startExtruding(1)\" class=\"btn btn-primary btn-lg btn-block\">Forward</button>\n" +
+    "                <button ng-click=\"startExtruding(0)\" class=\"btn btn-success btn-lg btn-block\">Reverse</button>\n" +
+    "                <button ng-click=\"stopExtruding()\" class=\"btn btn-danger btn-lg btn-block\">Stop</button>\n" +
+    "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "</div>\n" +
     "");
 }]);
 

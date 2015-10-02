@@ -1,7 +1,8 @@
 angular.module('ReossGui.extruder', [
     'ui.router',
     'placeholders',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'OctoPrint'
 ])
 
 .config(function config($stateProvider) {
@@ -19,7 +20,7 @@ angular.module('ReossGui.extruder', [
     });
 })
 
-.controller('ExtruderCtl', ["$scope", "$timeout", function ExtruderCtl($scope, $timeout) {
+.controller('ExtruderCtl', ["$scope", "$timeout", 'OctoPrint', function ExtruderCtl($scope, $timeout, OctoPrint) {
 
 
     $scope.currentExtruder = {
@@ -30,6 +31,29 @@ angular.module('ReossGui.extruder', [
         }
     };
 
+
+    $scope.jogScale = 1;
+
+    $scope.setJogScale = function(newScale) {
+       $scope.jogScale = newScale;
+    };
+
+
+    $scope.jog=function(direction){
+    
+        var params = direction;
+        params.scale = $scope.jogScale;
+        OctoPrint.jogHead(params, function(){
+
+        console.log("Jog head done");
+        console.log(params);        
+        
+        });
+    
+    
+    };
+
+    
 
     var defaultWizard = function() {
         return {
@@ -53,28 +77,64 @@ angular.module('ReossGui.extruder', [
     $scope.selectType = function(t) {
         if (t == 'fuse') {
             // load fuse presets
+           $scope.wizard.step = 'select_home_head';
+           $scope.currentExtruder.kind = "fuse";
+            OctoPrint.goHome( function(){
+               console.log("Home head done");
+               // console.log(axis);        
+               $scope.wizard.step = 'select_fuse';
+            });
+
         } else {
             // load wet presets
+            $scope.currentExtruder.kind = "wet";
+            $scope.wizard.step = 'select_home_head';
+            OctoPrint.goHome( function(){
+               console.log("Home head done");
+               // console.log(axis);        
+               $scope.wizard.step = 'select_wet';
+            });
+
         }
 
-        $scope.wizard.step = 'select_' + t;
+        // $scope.wizard.step = 'select_' + t;
         $scope.wizard.extruder = t;
     };
 
     $scope.startWizard = function(ev) {
         $scope.wizard = defaultWizard();
-        $scope.wizard.step = 'select_home_head';
-        $timeout($scope.stepOne, 1000);
+        $scope.wizard.step = 'select_extruder_type';
     };
 
-    $scope.startToolChange = function() {
-        $scope.wizard.step = "select_set_zero";
-        // alert("Using preset: " + $scope.preset);
-    };
-    $scope.saveZero = function() {
 
+    $scope.fuseExtruderInstalled = function(){
         $scope.wizard.step = 'select_success';
+    };
 
+
+    $scope.wetExtruderInstalled = function(){
+        OctoPrint.goHomeWet( function(){
+            console.log("Home head done");
+
+            $scope.wizard.step = "select_set_zero";
+
+        });
+
+    };
+
+    $scope.wetExtruderSetZero = function(){
+        OctoPrint.resetZero( function(){
+            console.log("Zero head done");
+            $scope.wizard.step = "select_success";
+
+        });
+
+    };
+
+
+
+    $scope.saveZero = function() {
+        $scope.wizard.step = 'select_success';
     };
 
     $scope.updatePosition = function(delta) {
