@@ -14,7 +14,8 @@
  */
 angular.module( 'ReossGui.restart', [
   'ui.router',
-  'plusOne'
+  'plusOne',
+  'power'
 ])
 
 /**
@@ -38,21 +39,34 @@ angular.module( 'ReossGui.restart', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'RestartCtrl', ["$scope","$window" , function RestartCtrl( $scope,$window ) {
+.controller( 'RestartCtrl', ["$scope","$window" , 'power', function RestartCtrl( $scope,$window, power ) {
 
 
-    $scope.isRestarting = false;
+    $scope.showConfirm = false;
+    $scope.action = null;
 
-    $scope.restart=function(){
-        $scope.isRestarting=true;
-    };
-    
-    $scope.reloadPage=function(){
-    
-       $window.location.reload();
+    $scope.actionRestart = function(){
+      $scope.action = "restart";
+      $scope.showConfirm = true;
     };
 
-}])
 
-;
+    $scope.actionShutdown = function(){
+      $scope.action = "shutdown";
+      $scope.showConfirm = true;
+    };
+
+    $scope.confirm = function(){
+      power.action($scope.action, function(){
+
+
+      });
+    };
+
+    $scope.cancel = function(){
+      $scope.showConfirm = false;
+      $scope.action = null;
+    };
+
+}]);
 

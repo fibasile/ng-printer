@@ -1,13 +1,13 @@
 
 <div class="row">
 
-    <div class="col-sm-4">
+    <div class="col-sm-2">
     <a title="Go to the home folder" class="btn btn-default" ng-click="browse()">
             <i class="fa fa-home"></i>
             </a>
     </div>
 
-    <div class="col-sm-4 text-right">
+    <div class="col-sm-6 text-right">
         <div class="dropdown">
         <button class="btn btn-default" ng-click="refresh()"><i class="fa fa-refresh "></i> Refresh</button>
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -21,6 +21,14 @@
             <li><a ng-click="filterFiles('gcode')">Show only gcode</a></li>
             <li><a ng-click="filterFiles()">Show all files</a></li>
          </ul>
+
+
+          <div class="btn-group" id="filter">
+                                <button type="button" class="btn btn-default" ng-class="{'active' : (filter=='')}" ng-click="filterFiles('')">All</button>
+                                <button type="button" class="btn btn-default" ng-class="{'active' : (filter=='wet')}" ng-click="filterFiles('wet')">WET</button>
+                                <button type="button" class="btn btn-default" ng-class="{'active' : (filter=='fuse')}" ng-click="filterFiles('fuse')">FUSE</button>
+                            </div>
+
         </div> 
          
 </div>

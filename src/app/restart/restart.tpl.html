@@ -1,25 +1,24 @@
-
-
-<div ng-hide="isRestarting" class="alert alert-warning">
-
-<p class="lead">Restart control panel</h1>
-
-<p>Are you sure you want to restart the panel?</p>
-
+<div ng-show="showConfirm" class="alert alert-warning">
+    <p class="lead">Confirm</p>
+        <p>Are you sure you want to {{ action }}?</p>
+        <p></p>
+        <div class="text-right">
+        <button class="btn btn-default btn-xlarge" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-danger btn-xlarge" ng-click="confirm()">Confirm</button>
+        </div>
 </div>
-
-
-<button ng-hide="isRestarting" class="btn btn-danger btn-xlarge" ng-click="restart()" nd-disabled="isRestarting">Yes, restart panel</button>
-
-
-
-<div ng-show="isRestarting">
-
-<div class="alert alert-info">
-<p class="lead">Restart in progress...</p>
-<p>Reload the page in 60 seconds.</p>
-</div>
-
-<button class="btn btn-success btn-xlarge" ng-click="reloadPage()">Reload</button>
-
+<div ng-hide="showConfirm" class="panel panel-default">
+    <div class="panel-heading">
+        Power
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <button class="btn btn-block btn-lg btn-primary" ng-click="actionRestart()">Restart</button>
+            </div>
+            <div class="col-sm-6">
+                <button class="btn btn-block btn-lg btn-danger" ng-click="actionShutdown()">Shutdown</button>
+            </div>
+        </div>
+    </div>
 </div>

@@ -127,7 +127,8 @@ angular.module('ReossGui.wizard', [
         $scope.files = [];
         $scope.selectedFile = null;
         $scope.order = null;
-        $scope.filter = null;
+        $scope.filter = "";
+
 
 
         $scope.gcodeAnalysis = function() {
@@ -170,12 +171,23 @@ angular.module('ReossGui.wizard', [
         };
 
         $scope.filterFiles = function(f) {
+            $scope.filter = f;
             if (f == 'gcode') {
-                
                 $scope.files = $scope.orig_files.filter(function(el){
                     return el.name.search(".gco")!=-1;
                 });
-            } else {
+            } 
+            if (f == 'wet') {
+                $scope.files = $scope.orig_files.filter(function(el){
+                    return el.name.search("wet")!=-1 || el.name.search("WET") != -1;
+                });
+            }
+            if (f == 'fuse') {
+                $scope.files = $scope.orig_files.filter(function(el){
+                    return el.name.search("wet")==-1 && el.name.search("WET") == -1;
+                });
+            }
+            if (f === '') {
                 $scope.files = $scope.orig_files;
             }
          

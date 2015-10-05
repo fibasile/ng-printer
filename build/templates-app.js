@@ -208,13 +208,13 @@ angular.module("extruder/extruder.tpl.html", []).run(["$templateCache", function
     "                    Zero Extruder\n" +
     "                </div>\n" +
     "                <div class=\"panel-body\">\n" +
-    "                    <p>Move the syringe to the desired zero using the jog controls and click continue</p>\n" +
-    "                    <p>\n" +
+    "                    <p>Move the syringe to the desired zero and click continue</p>\n" +
+    "                    <p class=\"text-center\">\n" +
     "                        <div class=\"btn-group\" data-toggle=\"buttons-radio\" id=\"jog_distance\">\n" +
-    "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' : (jogScale == 0.1)}\" ng-click=\"setJogScale(0.1)\">0.1</button>\n" +
-    "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' : (jogScale == 1)}\" ng-click=\"setJogScale(1)\">1</button>\n" +
-    "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' :(jogScale == 10)}\" ng-click=\"setJogScale(10)\">10</button>\n" +
-    "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' :(jogScale == 100)}\" ng-click=\"setJogScale(100)\">100</button>\n" +
+    "                                <button type=\"button\" class=\"btn btn-primary btn-lg\" ng-class=\"{'active' : (jogScale == 0.1)}\" ng-click=\"setJogScale(0.1)\">0.1</button>\n" +
+    "                                <button type=\"button\" class=\"btn btn-primary btn-lg\" ng-class=\"{'active' : (jogScale == 1)}\" ng-click=\"setJogScale(1)\">1</button>\n" +
+    "                                <button type=\"button\" class=\"btn btn-primary btn-lg\" ng-class=\"{'active' :(jogScale == 10)}\" ng-click=\"setJogScale(10)\">10</button>\n" +
+    "                                <button type=\"button\" class=\"btn btn-primary btn-lg\" ng-class=\"{'active' :(jogScale == 100)}\" ng-click=\"setJogScale(100)\">100</button>\n" +
     "                            </div>\n" +
     "                    </p>\n" +
     "                    <div class=\"row\">\n" +
@@ -225,6 +225,7 @@ angular.module("extruder/extruder.tpl.html", []).run(["$templateCache", function
     "                        <button class=\"btn btn-default btn-lg btn-block\" ng-click=\"jog({z: -1})\">Z-</button>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
+    "                    <br/>\n" +
     "                    <button class=\"btn btn-warning btn-lg btn-block\" ng-click=\"wetExtruderSetZero()\">Continue</button>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -352,30 +353,29 @@ angular.module("jog/jog.tpl.html", []).run(["$templateCache", function($template
 
 angular.module("restart/restart.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("restart/restart.tpl.html",
-    "\n" +
-    "\n" +
-    "<div ng-hide=\"isRestarting\" class=\"alert alert-warning\">\n" +
-    "\n" +
-    "<p class=\"lead\">Restart control panel</h1>\n" +
-    "\n" +
-    "<p>Are you sure you want to restart the panel?</p>\n" +
-    "\n" +
+    "<div ng-show=\"showConfirm\" class=\"alert alert-warning\">\n" +
+    "    <p class=\"lead\">Confirm</p>\n" +
+    "        <p>Are you sure you want to {{ action }}?</p>\n" +
+    "        <p></p>\n" +
+    "        <div class=\"text-right\">\n" +
+    "        <button class=\"btn btn-default btn-xlarge\" ng-click=\"cancel()\">Cancel</button>\n" +
+    "        <button class=\"btn btn-danger btn-xlarge\" ng-click=\"confirm()\">Confirm</button>\n" +
+    "        </div>\n" +
     "</div>\n" +
-    "\n" +
-    "\n" +
-    "<button ng-hide=\"isRestarting\" class=\"btn btn-danger btn-xlarge\" ng-click=\"restart()\" nd-disabled=\"isRestarting\">Yes, restart panel</button>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "<div ng-show=\"isRestarting\">\n" +
-    "\n" +
-    "<div class=\"alert alert-info\">\n" +
-    "<p class=\"lead\">Restart in progress...</p>\n" +
-    "<p>Reload the page in 60 seconds.</p>\n" +
-    "</div>\n" +
-    "\n" +
-    "<button class=\"btn btn-success btn-xlarge\" ng-click=\"reloadPage()\">Reload</button>\n" +
-    "\n" +
+    "<div ng-hide=\"showConfirm\" class=\"panel panel-default\">\n" +
+    "    <div class=\"panel-heading\">\n" +
+    "        Power\n" +
+    "    </div>\n" +
+    "    <div class=\"panel-body\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <button class=\"btn btn-block btn-lg btn-primary\" ng-click=\"actionRestart()\">Restart</button>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-6\">\n" +
+    "                <button class=\"btn btn-block btn-lg btn-danger\" ng-click=\"actionShutdown()\">Shutdown</button>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "</div>\n" +
     "");
 }]);
@@ -668,13 +668,13 @@ angular.module("wizard/wizard.tpl.html", []).run(["$templateCache", function($te
     "\n" +
     "<div class=\"row\">\n" +
     "\n" +
-    "    <div class=\"col-sm-4\">\n" +
+    "    <div class=\"col-sm-2\">\n" +
     "    <a title=\"Go to the home folder\" class=\"btn btn-default\" ng-click=\"browse()\">\n" +
     "            <i class=\"fa fa-home\"></i>\n" +
     "            </a>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"col-sm-4 text-right\">\n" +
+    "    <div class=\"col-sm-6 text-right\">\n" +
     "        <div class=\"dropdown\">\n" +
     "        <button class=\"btn btn-default\" ng-click=\"refresh()\"><i class=\"fa fa-refresh \"></i> Refresh</button>\n" +
     "        <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\n" +
@@ -688,6 +688,14 @@ angular.module("wizard/wizard.tpl.html", []).run(["$templateCache", function($te
     "            <li><a ng-click=\"filterFiles('gcode')\">Show only gcode</a></li>\n" +
     "            <li><a ng-click=\"filterFiles()\">Show all files</a></li>\n" +
     "         </ul>\n" +
+    "\n" +
+    "\n" +
+    "          <div class=\"btn-group\" id=\"filter\">\n" +
+    "                                <button type=\"button\" class=\"btn btn-default\" ng-class=\"{'active' : (filter=='')}\" ng-click=\"filterFiles('')\">All</button>\n" +
+    "                                <button type=\"button\" class=\"btn btn-default\" ng-class=\"{'active' : (filter=='wet')}\" ng-click=\"filterFiles('wet')\">WET</button>\n" +
+    "                                <button type=\"button\" class=\"btn btn-default\" ng-class=\"{'active' : (filter=='fuse')}\" ng-click=\"filterFiles('fuse')\">FUSE</button>\n" +
+    "                            </div>\n" +
+    "\n" +
     "        </div> \n" +
     "         \n" +
     "</div>\n" +

@@ -35,7 +35,7 @@ angular.module('pump', [])
 
 
     var Connection = {};
-    Connection.API_ENDPOINT = "http://localhost";
+    Connection.API_ENDPOINT = "";
 
     Connection.run = function(direction, steps, cb) {
         var data = {

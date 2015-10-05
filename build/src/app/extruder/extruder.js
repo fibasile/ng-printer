@@ -20,11 +20,21 @@ angular.module('ReossGui.extruder', [
     });
 })
 
-.controller('ExtruderCtl', ["$scope", "$timeout", 'OctoPrint', function ExtruderCtl($scope, $timeout, OctoPrint) {
+
+.service('Extruder', [ function(){
+
+    return {
+        kind: "fuse"
+    };
+
+
+}])
+
+.controller('ExtruderCtl', ["$scope", "$timeout", 'OctoPrint', 'Extruder', function ExtruderCtl($scope, $timeout, OctoPrint, Extruder) {
 
 
     $scope.currentExtruder = {
-        kind: "fuse",
+        kind: Extruder.kind,
         attributes: {
             filament: "1.75",
             diameter: "0.35"
@@ -78,7 +88,8 @@ angular.module('ReossGui.extruder', [
         if (t == 'fuse') {
             // load fuse presets
            $scope.wizard.step = 'select_home_head';
-           $scope.currentExtruder.kind = "fuse";
+           Extruder.kind = "fuse";
+           $scope.currentExtruder.kind = 'fuse';
             OctoPrint.goHome( function(){
                console.log("Home head done");
                // console.log(axis);        
@@ -88,6 +99,7 @@ angular.module('ReossGui.extruder', [
         } else {
             // load wet presets
             $scope.currentExtruder.kind = "wet";
+            Extruder.kind = "wet";
             $scope.wizard.step = 'select_home_head';
             OctoPrint.goHome( function(){
                console.log("Home head done");

@@ -60,13 +60,13 @@
                     Zero Extruder
                 </div>
                 <div class="panel-body">
-                    <p>Move the syringe to the desired zero using the jog controls and click continue</p>
-                    <p>
+                    <p>Move the syringe to the desired zero and click continue</p>
+                    <p class="text-center">
                         <div class="btn-group" data-toggle="buttons-radio" id="jog_distance">
-                                <button type="button" class="btn btn-primary" ng-class="{'active' : (jogScale == 0.1)}" ng-click="setJogScale(0.1)">0.1</button>
-                                <button type="button" class="btn btn-primary" ng-class="{'active' : (jogScale == 1)}" ng-click="setJogScale(1)">1</button>
-                                <button type="button" class="btn btn-primary" ng-class="{'active' :(jogScale == 10)}" ng-click="setJogScale(10)">10</button>
-                                <button type="button" class="btn btn-primary" ng-class="{'active' :(jogScale == 100)}" ng-click="setJogScale(100)">100</button>
+                                <button type="button" class="btn btn-primary btn-lg" ng-class="{'active' : (jogScale == 0.1)}" ng-click="setJogScale(0.1)">0.1</button>
+                                <button type="button" class="btn btn-primary btn-lg" ng-class="{'active' : (jogScale == 1)}" ng-click="setJogScale(1)">1</button>
+                                <button type="button" class="btn btn-primary btn-lg" ng-class="{'active' :(jogScale == 10)}" ng-click="setJogScale(10)">10</button>
+                                <button type="button" class="btn btn-primary btn-lg" ng-class="{'active' :(jogScale == 100)}" ng-click="setJogScale(100)">100</button>
                             </div>
                     </p>
                     <div class="row">
@@ -77,6 +77,7 @@
                         <button class="btn btn-default btn-lg btn-block" ng-click="jog({z: -1})">Z-</button>
                         </div>
                     </div>
+                    <br/>
                     <button class="btn btn-warning btn-lg btn-block" ng-click="wetExtruderSetZero()">Continue</button>
                 </div>
             </div>
