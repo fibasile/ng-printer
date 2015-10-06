@@ -375,8 +375,8 @@ angular.module('OctoPrint', [])
             content_type: 'application/json',
             data: {
                 "commands": [
-                    "G1 Z100 F2000",
-                    "G1 X20 Y20 F1000"
+                    "G1 Z10 F2000",
+                    "G1 X15 Y15 F1000"
                 ]
             }
         }, cb);

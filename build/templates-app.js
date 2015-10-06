@@ -601,9 +601,9 @@ angular.module("wet/wet.tpl.html", []).run(["$templateCache", function($template
     "                    <div class=\"col-sm-6\">\n" +
     "                        <label>Flow (%)</label>\n" +
     "                        <form class=\"form form-inline\">\n" +
-    "                            <input class=\"form-control\" disabled type=\"number\" min=\"0\" max=\"200\" ng-model=\"flow\" step=\"1\" ng-change=\"updateFlow()\"><br/>\n" +
-    "                            <button class=\"btn btn-default btn-lg\" ng-click=\"setFlow(1)\">+</button>\n" +
-    "                            <button class=\"btn btn-default btn-lg\" ng-click=\"setFlow(-1)\">-</button>\n" +
+    "                            <input class=\"form-control\" disabled type=\"number\" min=\"0\" max=\"2000\" ng-model=\"flow\" step=\"1\" ng-change=\"updateFlow()\"><br/>\n" +
+    "                            <button class=\"btn btn-default btn-lg\" ng-click=\"setFlow(100)\">+</button>\n" +
+    "                            <button class=\"btn btn-default btn-lg\" ng-click=\"setFlow(-100)\">-</button>\n" +
     "                        </form>\n" +
     "                    </div>\n" +
     "                </div>\n" +
@@ -623,8 +623,8 @@ angular.module("wet/wet.tpl.html", []).run(["$templateCache", function($template
     "            <div class=\"panel-heading\">Control</div>\n" +
     "            <div class=\"panel-body\">\n" +
     "                <!-- <button ng-click=\"updateFlow()\" class=\"btn btn-success btn-lg btn-block\">Update flow</button> -->\n" +
-    "                <button ng-click=\"startExtruding(1)\" class=\"btn btn-primary btn-lg btn-block\">Forward</button>\n" +
-    "                <button ng-click=\"startExtruding(0)\" class=\"btn btn-success btn-lg btn-block\">Reverse</button>\n" +
+    "                <button ng-click=\"startExtruding(0)\" class=\"btn btn-primary btn-lg btn-block\">Forward</button>\n" +
+    "                <button ng-click=\"startExtruding(1)\" class=\"btn btn-success btn-lg btn-block\">Reverse</button>\n" +
     "                <button ng-click=\"stopExtruding()\" class=\"btn btn-danger btn-lg btn-block\">Stop</button>\n" +
     "            </div>\n" +
     "        </div>\n" +
