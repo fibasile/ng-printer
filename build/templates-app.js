@@ -284,6 +284,8 @@ angular.module("jog/jog.tpl.html", []).run(["$templateCache", function($template
     "                                    <td><a class=\"btn btn-default btn-sm\" ng-click=\"jog({z:-1})\"><i class=\"fa fa-arrow-down fa-2x\"></i></a></td>\n" +
     "                                </tr>\n" +
     "                            </table>\n" +
+    "				<br>\n" +
+    "				<button type=\"button\" class=\"btn btn-danger\" ng-click=\"kill()\">Stop Now</button>\n" +
     "                        </div>\n" +
     "                        <div class=\"col-sm-5\">\n" +
     "                            <label>Distance</label><br/>\n" +
@@ -620,7 +622,6 @@ angular.module("wet/wet.tpl.html", []).run(["$templateCache", function($template
     "                        <label>Override (%)</label> <br/>\n" +
     "\n" +
     "                                <div class=\"btn-group\" data-toggle=\"buttons-radio\" id=\"overrideScale\">\n" +
-    "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' : (overrideScale == 0.1)}\" ng-click=\"setOverrideScale(0.1)\">0.1</button>\n" +
     "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' : (overrideScale == 1)}\" ng-click=\"setOverrideScale(1)\">1</button>\n" +
     "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' :(overrideScale == 10)}\" ng-click=\"setOverrideScale(10)\">10</button>\n" +
     "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' :(overrideScale == 100)}\" ng-click=\"setOverrideScale(100)\">100</button>\n" +

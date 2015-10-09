@@ -42,9 +42,9 @@ angular.module('pump', [])
     Connection.API_ENDPOINT = "";
     Connection.settings = {
         status: 'idle',
-        flow: 0,
-        size: 0,
-        capacity: 0
+        flow: 100,
+        size: 5,
+        capacity: 1
     };
 
     Connection.run = function(direction, steps, cb) {

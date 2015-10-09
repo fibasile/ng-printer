@@ -118,6 +118,13 @@ angular.module( 'ReossGui.jog', [
     };
 
 
+    $scope.kill = function(){
+	OctoPrint.kill(function(){
+
+
+	});
+    };
+
 }])
 
 ;
