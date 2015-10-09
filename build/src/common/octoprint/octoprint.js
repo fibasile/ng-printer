@@ -162,6 +162,26 @@ angular.module('OctoPrint', [])
 
     };
 
+
+
+    Connection.kill = function(cb){
+
+        // send M112 emergency kill
+         getRequest({
+            url: Connection.API_ENDPOINT + '/api/printer/command',
+            method: "POST",
+            content_type: 'application/json',
+            data: {
+                "commands": [
+                    "M112"
+                ] 
+            }
+        }, cb);
+
+
+
+    };
+
     Connection.jogHead = function(args, cb) {
 
         var delta = args;
@@ -199,12 +219,13 @@ angular.module('OctoPrint', [])
     Connection.homeHead = function(axis, cb) {
 
         getRequest({
-            url: Connection.API_ENDPOINT + '/api/printer/printhead',
+            url: Connection.API_ENDPOINT + '/api/printer/command',
             method: "POST",
             content_type: 'application/json',
             data: {
-                "command": "home",
-                "axes": axis
+                "commands": [
+                    "G28"
+                ] 
             }
         }, cb);
     };
@@ -375,8 +396,8 @@ angular.module('OctoPrint', [])
             content_type: 'application/json',
             data: {
                 "commands": [
-                    "G1 Z10 F2000",
-                    "G1 X15 Y15 F1000"
+                    "G1 Z5 F240"
+                    // "G1 X15 Y15 F1000"
                 ]
             }
         }, cb);

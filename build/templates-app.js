@@ -586,24 +586,51 @@ angular.module("wet/wet.tpl.html", []).run(["$templateCache", function($template
     "                        </form>\n" +
     "                    </div>\n" +
     "                    <div class=\"col-sm-6\">\n" +
-    "                        <label>Volume (ml)</label>\n" +
+    "                        <label>Flow rate ml/h</label>\n" +
     "                        <form class=\"form form-inline\">\n" +
     "                            <!-- <input class=\"form-control\" type=\"number\" disabled=\"true\" min=\"0\" max=\"200\" ng-model=\"capacity\" step=\"0.01\" ng-change=\"updateFlow()\"> -->\n" +
     "                            <select class=\"form-control input-lg\" convert-to-number ng-model=\"capacity\" ng-change=\"updateFlow()\">\n" +
     "                                <option value=\"0.1\">0.1</option>\n" +
+    "                                <option value=\"0.2\">0.2</option>\n" +
+    "                                <option value=\"0.3\">0.3</option>\n" +
+    "                                <option value=\"0.4\">0.4</option>\n" +
     "                                <option value=\"0.5\">0.5</option>\n" +
+    "                                <option value=\"0.6\">0.6</option>\n" +
+    "                                <option value=\"0.7\">0.7</option>\n" +
+    "                                <option value=\"0.8\">0.8</option>\n" +
+    "                                <option value=\"0.9\">0.9</option>\n" +
     "                                <option value=\"1\">1</option>\n" +
+    "                                <option value=\"1.1\">1.1</option>\n" +
+    "                                <option value=\"1.2\">1.2</option>\n" +
+    "                                <option value=\"1.3\">1.3</option>\n" +
+    "                                <option value=\"1.4\">1.4</option>\n" +
+    "                                <option value=\"1.5\">1.5</option>\n" +
+    "                                <option value=\"1.6\">1.6</option>\n" +
+    "                                <option value=\"1.7\">1.7</option>\n" +
+    "                                <option value=\"1.8\">1.8</option>\n" +
+    "                                <option value=\"1.9\">1.9</option>\n" +
+    "                                <option value=\"2\">2</option>\n" +
+    "                                <option value=\"3\">3</option>\n" +
     "                            </select>\n" +
     "                            <!-- <button class=\"btn btn-default btn-lg\" ng-click=\"setCapacity(0.1)\">+</button> -->\n" +
     "                            <!-- <button class=\"btn btn-default btn-lg\" ng-click=\"setCapacity(-0.1)\">-</button> -->\n" +
     "                        </form>\n" +
     "                    </div>\n" +
     "                    <div class=\"col-sm-6\">\n" +
-    "                        <label>Flow (%)</label>\n" +
+    "                        <label>Override (%)</label> <br/>\n" +
+    "\n" +
+    "                                <div class=\"btn-group\" data-toggle=\"buttons-radio\" id=\"overrideScale\">\n" +
+    "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' : (overrideScale == 0.1)}\" ng-click=\"setOverrideScale(0.1)\">0.1</button>\n" +
+    "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' : (overrideScale == 1)}\" ng-click=\"setOverrideScale(1)\">1</button>\n" +
+    "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' :(overrideScale == 10)}\" ng-click=\"setOverrideScale(10)\">10</button>\n" +
+    "                                <button type=\"button\" class=\"btn btn-primary\" ng-class=\"{'active' :(overrideScale == 100)}\" ng-click=\"setOverrideScale(100)\">100</button>\n" +
+    "                            </div>\n" +
+    "                            <br/>\n" +
+    "\n" +
     "                        <form class=\"form form-inline\">\n" +
     "                            <input class=\"form-control\" disabled type=\"number\" min=\"0\" max=\"2000\" ng-model=\"flow\" step=\"1\" ng-change=\"updateFlow()\"><br/>\n" +
-    "                            <button class=\"btn btn-default btn-lg\" ng-click=\"setFlow(100)\">+</button>\n" +
-    "                            <button class=\"btn btn-default btn-lg\" ng-click=\"setFlow(-100)\">-</button>\n" +
+    "                            <button class=\"btn btn-default btn-lg\" ng-click=\"setFlow(1)\">+</button>\n" +
+    "                            <button class=\"btn btn-default btn-lg\" ng-click=\"setFlow(-1)\">-</button>\n" +
     "                        </form>\n" +
     "                    </div>\n" +
     "                </div>\n" +
@@ -623,8 +650,8 @@ angular.module("wet/wet.tpl.html", []).run(["$templateCache", function($template
     "            <div class=\"panel-heading\">Control</div>\n" +
     "            <div class=\"panel-body\">\n" +
     "                <!-- <button ng-click=\"updateFlow()\" class=\"btn btn-success btn-lg btn-block\">Update flow</button> -->\n" +
-    "                <button ng-click=\"startExtruding(0)\" class=\"btn btn-primary btn-lg btn-block\">Forward</button>\n" +
-    "                <button ng-click=\"startExtruding(1)\" class=\"btn btn-success btn-lg btn-block\">Reverse</button>\n" +
+    "                <button ng-click=\"startExtruding(0)\" class=\"btn btn-primary btn-lg btn-block\">Dispense</button>\n" +
+    "                <button ng-click=\"startExtruding(1)\" class=\"btn btn-success btn-lg btn-block\">Aspirate</button>\n" +
     "                <button ng-click=\"stopExtruding()\" class=\"btn btn-danger btn-lg btn-block\">Stop</button>\n" +
     "            </div>\n" +
     "        </div>\n" +

@@ -3,6 +3,10 @@ angular.module('pump', [])
 .service('pump', ['$http', function($http) {
 
 
+
+
+
+
     var buildHTTPRequest = function(resource) {
         var req = {
             method: resource.method,
@@ -36,6 +40,12 @@ angular.module('pump', [])
 
     var Connection = {};
     Connection.API_ENDPOINT = "";
+    Connection.settings = {
+        status: 'idle',
+        flow: 0,
+        size: 0,
+        capacity: 0
+    };
 
     Connection.run = function(direction, steps, cb) {
         var data = {

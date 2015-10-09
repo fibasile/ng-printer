@@ -30,12 +30,13 @@ angular.module('ReossGui.wet', [
 .controller('WetCtrl', ['$scope', 'OctoPrint', 'pump', '$interval', function WetCtrl($scope, OctoPrint, pump, $interval) {
 
 
-    $scope.flow = 100;
-    $scope.size = 5;
-    $scope.capacity = 1;
+    $scope.flow = pump.settings.flow;
+    $scope.size = pump.settings.size;
+    $scope.capacity = pump.settings.capacity;
     $scope.direction = 0;
     $scope.microsteps =  0;
-    $scope.status = "idle";
+    $scope.status = pump.settings.status;
+    $scope.overrideScale = 1;
 
 
     $scope.values = [
@@ -49,24 +50,29 @@ angular.module('ReossGui.wet', [
         {vol: 1, diam: 5, steps: 2.830}
         */
         { label: 'SOCOREX 20 mL', diam: '20', 'vol': 0.1, 'steps' : 0.018},
-        { label: 'SOCOREX 20 mL', diam: '20', 'vol': 0.5, 'steps' : 0.092},
-        { label: 'SOCOREX 20 mL', diam: '20', 'vol': 1, 'steps' : 0.184},
+        // { label: 'SOCOREX 20 mL', diam: '20', 'vol': 0.5, 'steps' : 0.092},
+        // { label: 'SOCOREX 20 mL', diam: '20', 'vol': 1, 'steps' : 0.184},
         { label: 'SOCOREX 10 mL', diam: '10', 'vol': 0.1, 'steps' : 0.032},
-        { label: 'SOCOREX 10 mL', diam: '10', 'vol': 0.5, 'steps' : 0.161},
-        { label: 'SOCOREX 10 mL', diam: '10', 'vol': 1, 'steps' : 0.322},
+        // { label: 'SOCOREX 10 mL', diam: '10', 'vol': 0.5, 'steps' : 0.161},
+        // { label: 'SOCOREX 10 mL', diam: '10', 'vol': 1, 'steps' : 0.322},
         { label: 'Hamilton #1005 5 mL', diam: '5', 'vol': 0.1, 'steps' : 0.067},
-        { label: 'Hamilton #1005 5 mL', diam: '5', 'vol': 0.5, 'steps' : 0.339},
-        { label: 'Hamilton #1005 5 mL', diam: '5', 'vol': 1, 'steps' : 0.679},
+        // { label: 'Hamilton #1005 5 mL', diam: '5', 'vol': 0.5, 'steps' : 0.339},
+        // { label: 'Hamilton #1005 5 mL', diam: '5', 'vol': 1, 'steps' : 0.679},
         { label: 'Terumo 12 mL', diam: '12', 'vol': 0.1, 'steps' : 0.027},
-        { label: 'Terumo 12 mL', diam: '12', 'vol': 0.5, 'steps' : 0.138},
-        { label: 'Terumo 12 mL', diam: '12', 'vol': 1, 'steps' : 0.276},
-        { label: 'Terumo 6 mL', diam: '6', 'vol': 0.1, 'steps' : 0.041},
-        { label: 'Terumo 6 mL', diam: '6', 'vol': 0.5, 'steps' : 0.209},
-        { label: 'Terumo 6 mL', diam: '6', 'vol': 1, 'steps' : 0.418}
+        // { label: 'Terumo 12 mL', diam: '12', 'vol': 0.5, 'steps' : 0.138},
+        // { label: 'Terumo 12 mL', diam: '12', 'vol': 1, 'steps' : 0.276},
+        { label: 'Terumo 6 mL', diam: '6', 'vol': 0.1, 'steps' : 0.041}
+        // { label: 'Terumo 6 mL', diam: '6', 'vol': 0.5, 'steps' : 0.209},
+        // { label: 'Terumo 6 mL', diam: '6', 'vol': 1, 'steps' : 0.418}
     ];
 
+
+    $scope.setOverrideScale= function(scale){
+        $scope.overrideScale = scale;
+    };
+
     $scope.setFlow = function(f){    
-        $scope.flow += parseFloat(f);
+        $scope.flow += parseFloat(f) * $scope.overrideScale;
         $scope.flow = $scope.flow.toFixed(3);
         $scope.flow = Math.max(0,$scope.flow);
         $scope.updateFlow();
@@ -100,13 +106,20 @@ angular.module('ReossGui.wet', [
         // compute steps 
         for (var i=0;i<$scope.values.length;i++){
             var o = $scope.values[i];
-            if (o.vol == $scope.capacity && o.diam == $scope.size ) {
+            if (/*o.vol == $scope.capacity && */ o.diam == $scope.size ) {
                 console.log('found microsteps');
-                $scope.microsteps = parseFloat(o.steps) * $scope.flow / 100;
+                $scope.microsteps = parseFloat(o.steps) * parseFloat(o.vol) * $scope.flow / 100;
                 $scope.microsteps = $scope.microsteps.toFixed(3);
                 break;
             }
         }
+
+        pump.settings.capacity = $scope.capacity;
+        pump.settings.size = $scope.size;
+        pump.settings.flow = $scope.flow;
+        pump.settings.microsteps = $scope.microsteps;
+
+
 
     };
 
@@ -136,6 +149,7 @@ angular.module('ReossGui.wet', [
             }
             if (typeof(status.status) !== undefined) {
                 $scope.status = status.status;
+                pump.settings.status = status.status;
             }
             console.log("status " + status);
         });

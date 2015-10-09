@@ -18,24 +18,51 @@
                         </form>
                     </div>
                     <div class="col-sm-6">
-                        <label>Volume (ml)</label>
+                        <label>Flow rate ml/h</label>
                         <form class="form form-inline">
                             <!-- <input class="form-control" type="number" disabled="true" min="0" max="200" ng-model="capacity" step="0.01" ng-change="updateFlow()"> -->
                             <select class="form-control input-lg" convert-to-number ng-model="capacity" ng-change="updateFlow()">
                                 <option value="0.1">0.1</option>
+                                <option value="0.2">0.2</option>
+                                <option value="0.3">0.3</option>
+                                <option value="0.4">0.4</option>
                                 <option value="0.5">0.5</option>
+                                <option value="0.6">0.6</option>
+                                <option value="0.7">0.7</option>
+                                <option value="0.8">0.8</option>
+                                <option value="0.9">0.9</option>
                                 <option value="1">1</option>
+                                <option value="1.1">1.1</option>
+                                <option value="1.2">1.2</option>
+                                <option value="1.3">1.3</option>
+                                <option value="1.4">1.4</option>
+                                <option value="1.5">1.5</option>
+                                <option value="1.6">1.6</option>
+                                <option value="1.7">1.7</option>
+                                <option value="1.8">1.8</option>
+                                <option value="1.9">1.9</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
                             </select>
                             <!-- <button class="btn btn-default btn-lg" ng-click="setCapacity(0.1)">+</button> -->
                             <!-- <button class="btn btn-default btn-lg" ng-click="setCapacity(-0.1)">-</button> -->
                         </form>
                     </div>
                     <div class="col-sm-6">
-                        <label>Flow (%)</label>
+                        <label>Override (%)</label> <br/>
+
+                                <div class="btn-group" data-toggle="buttons-radio" id="overrideScale">
+                                <button type="button" class="btn btn-primary" ng-class="{'active' : (overrideScale == 0.1)}" ng-click="setOverrideScale(0.1)">0.1</button>
+                                <button type="button" class="btn btn-primary" ng-class="{'active' : (overrideScale == 1)}" ng-click="setOverrideScale(1)">1</button>
+                                <button type="button" class="btn btn-primary" ng-class="{'active' :(overrideScale == 10)}" ng-click="setOverrideScale(10)">10</button>
+                                <button type="button" class="btn btn-primary" ng-class="{'active' :(overrideScale == 100)}" ng-click="setOverrideScale(100)">100</button>
+                            </div>
+                            <br/>
+
                         <form class="form form-inline">
                             <input class="form-control" disabled type="number" min="0" max="2000" ng-model="flow" step="1" ng-change="updateFlow()"><br/>
-                            <button class="btn btn-default btn-lg" ng-click="setFlow(100)">+</button>
-                            <button class="btn btn-default btn-lg" ng-click="setFlow(-100)">-</button>
+                            <button class="btn btn-default btn-lg" ng-click="setFlow(1)">+</button>
+                            <button class="btn btn-default btn-lg" ng-click="setFlow(-1)">-</button>
                         </form>
                     </div>
                 </div>
@@ -55,8 +82,8 @@
             <div class="panel-heading">Control</div>
             <div class="panel-body">
                 <!-- <button ng-click="updateFlow()" class="btn btn-success btn-lg btn-block">Update flow</button> -->
-                <button ng-click="startExtruding(0)" class="btn btn-primary btn-lg btn-block">Forward</button>
-                <button ng-click="startExtruding(1)" class="btn btn-success btn-lg btn-block">Reverse</button>
+                <button ng-click="startExtruding(0)" class="btn btn-primary btn-lg btn-block">Dispense</button>
+                <button ng-click="startExtruding(1)" class="btn btn-success btn-lg btn-block">Aspirate</button>
                 <button ng-click="stopExtruding()" class="btn btn-danger btn-lg btn-block">Stop</button>
             </div>
         </div>
