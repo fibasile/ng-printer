@@ -35,7 +35,7 @@ angular.module('power', [])
 
 
     var Connection = {};
-    Connection.API_ENDPOINT = "http://localhost:8080";
+    Connection.API_ENDPOINT = "";//"http://localhost:8080";
 
     Connection.action = function(action, cb) {
         var data = {
