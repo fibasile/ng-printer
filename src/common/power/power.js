@@ -43,7 +43,7 @@ angular.module('power', [])
             "param": action
         };
         getRequest({
-            url: Connection.API_ENDPOINT + "/power",
+            url: Connection.API_ENDPOINT + "/pump/power",
             method: "POST",
             // content_type: 'application/json',
             data: data
