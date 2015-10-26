@@ -53,6 +53,7 @@ angular.module( 'ReossGui.jog', [
     
         var params = direction;
         params.scale = $scope.jogScale;
+        params.feed = $scope.feed_rate;
         OctoPrint.jogHead(params, function(){
 
         console.log("Jog head done");

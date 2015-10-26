@@ -186,6 +186,8 @@ angular.module('OctoPrint', [])
 
         var delta = args;
         var k = args.scale;
+        var f = args.feed;
+        
 
         var data = {
             "command": "jog",
@@ -204,8 +206,12 @@ angular.module('OctoPrint', [])
         if (delta.z) {
             data.z = parseFloat(delta.z) * k;
         }
+        
+        if (f){
+            data.factor = f;
+        }
 
-
+        console.log(data);
         getRequest({
             url: Connection.API_ENDPOINT + '/api/printer/printhead',
             method: "POST",
