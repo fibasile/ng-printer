@@ -108,7 +108,7 @@ angular.module('ReossGui.wet', [
             var o = $scope.values[i];
             if (/*o.vol == $scope.capacity && */ o.diam == $scope.size ) {
                 console.log('found microsteps');
-                $scope.microsteps = parseFloat(o.steps) * 10 * parseFloat(o.vol) * $scope.capacity * ($scope.flow / 100);
+                $scope.microsteps = parseFloat(o.steps) * 10 * $scope.capacity * ($scope.flow / 100);
                 $scope.microsteps = $scope.microsteps.toFixed(3);
                 break;
             }
