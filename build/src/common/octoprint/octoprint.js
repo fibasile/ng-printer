@@ -164,17 +164,17 @@ angular.module('OctoPrint', [])
 
 
 
-    Connection.kill = function(cb){
+    Connection.kill = function(cb) {
 
         // send M112 emergency kill
-         getRequest({
+        getRequest({
             url: Connection.API_ENDPOINT + '/api/printer/command',
             method: "POST",
             content_type: 'application/json',
             data: {
                 "commands": [
                     "M112"
-                ] 
+                ]
             }
         }, cb);
 
@@ -183,11 +183,12 @@ angular.module('OctoPrint', [])
     };
 
     Connection.jogHead = function(args, cb) {
+        console.log(data);
 
         var delta = args;
         var k = args.scale;
         var f = args.feed;
-        
+
 
         var data = {
             "command": "jog",
@@ -206,18 +207,31 @@ angular.module('OctoPrint', [])
         if (delta.z) {
             data.z = parseFloat(delta.z) * k;
         }
-        
-        if (f){
-            data.factor = f;
+
+        var data2 = {};
+        data2.command = 'feedrate';
+        if (f) {
+            data2.factor = f;
+        } else {
+            data2.factor = 100;
         }
 
-        console.log(data);
         getRequest({
             url: Connection.API_ENDPOINT + '/api/printer/printhead',
             method: "POST",
             content_type: 'application/json',
-            data: data
-        }, cb);
+            data: data2
+        }, function() {
+
+            getRequest({
+                url: Connection.API_ENDPOINT + '/api/printer/printhead',
+                method: "POST",
+                content_type: 'application/json',
+                data: data
+            }, cb);
+
+        });
+
 
     };
 
@@ -231,7 +245,7 @@ angular.module('OctoPrint', [])
             data: {
                 "commands": [
                     "G28"
-                ] 
+                ]
             }
         }, cb);
     };
@@ -336,7 +350,7 @@ angular.module('OctoPrint', [])
     };
 
 
-    Connection.goHome = function(cb){
+    Connection.goHome = function(cb) {
 
 
         getRequest({
@@ -356,7 +370,7 @@ angular.module('OctoPrint', [])
 
 
 
-    Connection.goHomeWet = function(cb){
+    Connection.goHomeWet = function(cb) {
 
 
         getRequest({
@@ -376,7 +390,7 @@ angular.module('OctoPrint', [])
 
 
 
-    Connection.resetZero = function(cb){
+    Connection.resetZero = function(cb) {
 
         getRequest({
             url: Connection.API_ENDPOINT + '/api/printer/command',
@@ -384,6 +398,8 @@ angular.module('OctoPrint', [])
             content_type: 'application/json',
             data: {
                 "commands": [
+                    "G92 Z0",
+                    "G1 Z2", 
                     "G92 Z0"
                 ]
             }
@@ -393,7 +409,7 @@ angular.module('OctoPrint', [])
 
 
 
-    Connection.parkHead = function(cb){
+    Connection.parkHead = function(cb) {
 
 
         getRequest({
