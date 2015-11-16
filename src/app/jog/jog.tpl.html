@@ -63,9 +63,12 @@
 <!--                 <a class="btn btn-default btn-block btn-lg" ui-sref="extruder"> Change tool</a>
  -->                       <a class="btn btn-default btn-block  btn-lg" ng-click="extrude()"> Extr.</a>
                 <a class="btn btn-default btn-block  btn-lg" ngclick="retract"> Retr.</a> 
+                <br/>
+                <label>Flow: <span class="label label-default">{{ extrude_flow }}</span> %</label>
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-default btn-block btn-lg" ng-click="setTemperature(190)">190</a>
+                    <a class="btn btn-default btn-block btn-lg" ng-click="setTemperature(50)">50</a>  
                     <a class="btn btn-default btn-block btn-lg" ng-click="setTemperature(0)">Off</a>
                 </div>
             </div>
@@ -74,8 +77,6 @@
      rz-slider-ceil="200" 
      ng-model="extrude_flow">
      </rzslider>
-                <br/>
-                <label>Flow: <span class="label label-default">{{ extrude_flow }}</span> %</label>
             </div>
         </div>
     </div>
