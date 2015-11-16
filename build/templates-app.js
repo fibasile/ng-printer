@@ -219,10 +219,10 @@ angular.module("extruder/extruder.tpl.html", []).run(["$templateCache", function
     "                    </p>\n" +
     "                    <div class=\"row\">\n" +
     "                        <div class=\"col-sm-6\">\n" +
-    "                        <button class=\"btn btn-default btn-lg btn-block\" ng-click=\"jog({z: 1})\">Z+</button>\n" +
+    "                        <button class=\"btn btn-default btn-lg btn-block\" ng-click=\"jog({z: 1})\">Z UP</button>\n" +
     "                        </div>\n" +
     "                        <div class=\"col-sm-6\">\n" +
-    "                        <button class=\"btn btn-default btn-lg btn-block\" ng-click=\"jog({z: -1})\">Z-</button>\n" +
+    "                        <button class=\"btn btn-default btn-lg btn-block\" ng-click=\"jog({z: -1})\">Z DOWN</button>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <br/>\n" +
@@ -317,9 +317,12 @@ angular.module("jog/jog.tpl.html", []).run(["$templateCache", function($template
     "<!--                 <a class=\"btn btn-default btn-block btn-lg\" ui-sref=\"extruder\"> Change tool</a>\n" +
     " -->                       <a class=\"btn btn-default btn-block  btn-lg\" ng-click=\"extrude()\"> Extr.</a>\n" +
     "                <a class=\"btn btn-default btn-block  btn-lg\" ngclick=\"retract\"> Retr.</a> \n" +
+    "                <br/>\n" +
+    "                <label>Flow: <span class=\"label label-default\">{{ extrude_flow }}</span> %</label>\n" +
     "                </div>\n" +
     "                <div class=\"col-sm-6\">\n" +
     "                    <a class=\"btn btn-default btn-block btn-lg\" ng-click=\"setTemperature(190)\">190</a>\n" +
+    "                    <a class=\"btn btn-default btn-block btn-lg\" ng-click=\"setTemperature(50)\">50</a>  \n" +
     "                    <a class=\"btn btn-default btn-block btn-lg\" ng-click=\"setTemperature(0)\">Off</a>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -328,8 +331,6 @@ angular.module("jog/jog.tpl.html", []).run(["$templateCache", function($template
     "     rz-slider-ceil=\"200\" \n" +
     "     ng-model=\"extrude_flow\">\n" +
     "     </rzslider>\n" +
-    "                <br/>\n" +
-    "                <label>Flow: <span class=\"label label-default\">{{ extrude_flow }}</span> %</label>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
